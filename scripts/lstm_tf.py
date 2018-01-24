@@ -27,17 +27,15 @@ class LstmCell(object):
         if out_dict is None:
             out_dict = {}
         for w in self.weights:
-            out_dict[w.name.rsplit(':', 1)[0]] = session.run([w])
+            out_dict[w.name.rsplit(':', 1)[0]] = session.run([w])[0]
         return out_dict
 
     def load_parameters(self, session, data_dict):
         """Loads the parameters saved by save_parameters()."""
         for w in self.weights:
             name = w.name.rsplit(':', 1)[0]
-            print('name', name)
             if name in data_dict:
-                print('in dict')
-                session.run(w.assign(value))
+                session.run(w.assign(data_dict[name]))
 
     def __call__(self, input, hidden):
         h_t, c_t = hidden

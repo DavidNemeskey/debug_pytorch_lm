@@ -52,7 +52,8 @@ class LstmCell(nn.Module):
     def load_parameters(self, data_dict, prefix=''):
         """Loads the parameters saved by save_parameters()."""
         for name, value in data_dict.items():
-            setattr(self, name, nn.Parameter(torch.from_numpy(value)))
+            real_name = name[len(prefix):]
+            setattr(self, real_name, nn.Parameter(torch.from_numpy(value)))
 
     def forward(self, input, hidden):
         h_t, c_t = hidden
