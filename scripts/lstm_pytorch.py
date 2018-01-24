@@ -109,17 +109,3 @@ class Lstm(nn.Module):
         return [(Variable(torch.Tensor(batch_size, self.hidden_size).zero_()),
                  Variable(torch.Tensor(batch_size, self.hidden_size).zero_()))
                 for _ in range(self.num_layers)]
-
-
-def test_cell():
-    """Tests the LstmCell class."""
-    import numpy as np
-
-    input_size, hidden_size = 3, 2
-    batch_size = 4
-
-    lstm_cell = LstmCell(input_size, hidden_size)
-    input_np = np.array([[1, 2, 3], [1, 2, 3], [2, 3, 4], [2, 3, 4]])
-    input = torch.FloatTensor(input_np)
-    hidden = lstm_cell.init_hidden(batch_size)
-    return lstm_cell.forward(Variable(input), hidden)

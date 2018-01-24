@@ -22,7 +22,6 @@ class LstmCell(object):
             self.b_h = tf.get_variable('b_h', (4 * hidden_size))
             self.weights += [self.b_i, self.b_h]
 
-
     def save_parameters(self, session, out_dict=None):
         if out_dict is None:
             out_dict = {}
@@ -58,33 +57,3 @@ class LstmCell(object):
             tf.zeros([self.batch_size, self.hidden_size]),
             tf.zeros([self.batch_size, self.hidden_size])
         )
-
-
-def test_cell():
-    """Tests the LstmCell class."""
-    import numpy as np
-
-    input_size, hidden_size = 3, 2
-    batch_size = 4
-
-    with tf.Graph().as_default() as graph:
-        input_data = tf.placeholder(tf.float32, [batch_size, input_size], 'input_data')
-        initializer = tf.random_uniform_initializer(-0.1, 0.1)
-        with tf.variable_scope('Model', initializer=initializer):
-            lstm_cell = LstmCell(input_size, hidden_size, batch_size)
-        init_state = lstm_cell.init_hidden()
-        final_state = lstm_cell(input_data, init_state)
-
-        init = tf.global_variables_initializer()
-
-    input_np = np.array([[1, 2, 3], [1, 2, 3], [2, 3, 4], [2, 3, 4]], dtype=np.float32)
-    print('input', input_np)
-    with tf.Session(graph=graph) as session:
-        session.run(init)
-        hidden = session.run(init_state)
-        print('hidden', hidden)
-        fetches = [final_state]
-        feed_dict = {input_data: input_np,
-                     init_state: hidden}
-        final_state = session.run(fetches, feed_dict)
-        print(final_state)
