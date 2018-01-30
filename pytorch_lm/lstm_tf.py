@@ -52,8 +52,14 @@ class LstmCell(object):
 
         return h_t, c_t
 
-    def init_hidden(self):
-        return (
-            tf.zeros([self.batch_size, self.hidden_size]),
-            tf.zeros([self.batch_size, self.hidden_size])
-        )
+    def init_hidden(self, np_arrays=None):
+        if np_arrays is None:
+            return (
+                tf.zeros([self.batch_size, self.hidden_size]),
+                tf.zeros([self.batch_size, self.hidden_size])
+            )
+        else:
+            return (
+                tf.convert_to_tensor(np_arrays[0]),
+                tf.convert_to_tensor(np_arrays[1])
+            )

@@ -73,10 +73,23 @@ class LstmCell(nn.Module):
 
         return h_t, c_t
 
-    def init_hidden(self, batch_size):
-        return (Variable(torch.Tensor(batch_size, self.hidden_size).zero_()),
-                Variable(torch.Tensor(batch_size, self.hidden_size).zero_()))
+    def init_hidden(self, batch_size=0, np_arrays=None):
+        """
+        Returns the Variables for the hidden states. If batch_size is specified,
+        all states are initialized to zero. If np_arrays is, it should be a
+        2-tuple of numpy arrays, which are wrapped in Variables.
+        """
+        if batch_size and np_arrays:
+            raise ValueError('Only one of {batch_size, np_arrays) is allowed.')
+        if not batch_size and not np_arrays:
+            raise ValueError('Either batch_size or np_arrays must be specified.')
 
+        if batch_size != 0:
+            return (Variable(torch.Tensor(batch_size, self.hidden_size).zero_()),
+                    Variable(torch.Tensor(batch_size, self.hidden_size).zero_()))
+        elif np_arrays is not None:
+            return (Variable(torch.from_numpy(np_arrays[0])),
+                    Variable(torch.from_numpy(np_arrays[1])))
 
 class Lstm(nn.Module):
     """

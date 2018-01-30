@@ -54,13 +54,13 @@ setup(name='pytorch_lm',
       # Install the scripts
       scripts=[
           'scripts/zaremba_pytorch.py',
-          'scripts/zaremba_tf.py',
+          # 'scripts/zaremba_tf.py',
       ],
+      test_suite = 'tests',
       # Tensorflow and numpy can be installed from requirement files, as they
       # are only required if the nn module / scripts are used.
       install_requires=[
-          'numpy>=1.11.0',
-          'tensorflow-gpu>=1.0',
+          'numpy>=1.13.0',
           # Better regex
           'regex'
       ],
