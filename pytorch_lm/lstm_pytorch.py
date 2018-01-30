@@ -106,19 +106,40 @@ class Lstm(nn.Module):
         self.layers = [LstmCell(input_size, hidden_size)
                        for _ in range(num_layers)]
 
-    def forward(self, input, hidden):
+    def forward(self, input, hiddens):
         outputs = []
+        # chunk() cuts batch_size x 1 x input_size chunks from input
         for input_t in input.chunk(input.size(1), dim=1):
             values = input_t.squeeze(1)  # From input to output
-            for i in range(self.num_layers):
-                h_t, c_t = self.layers[i](values, hidden[i])
+            for l in range(self.num_layers):
+                h_t, c_t = self.layers[l](values, hiddens[l])
                 values = h_t
-                hidden[i] = h_t, c_t
+                hiddens[l] = h_t, c_t
             outputs.append(values)
         outputs = torch.stack(outputs, 1)
-        return outputs, hidden
+        return outputs, hiddens
 
     def init_hidden(self, batch_size):
-        return [(Variable(torch.Tensor(batch_size, self.hidden_size).zero_()),
-                 Variable(torch.Tensor(batch_size, self.hidden_size).zero_()))
-                for _ in range(self.num_layers)]
+        return [self.layers[l].init_hidden(batch_size)
+                for l in range(self.num_layers)]
+
+    def save_parameters(self, out_dict=None, prefix=''):
+        """
+        Saves the parameters into a dictionary that can later be e.g. savez'd.
+        If prefix is specified, it is prepended to the names of the parameters,
+        allowing for hierarchical saving / loading of parameters of a composite
+        model.
+        """
+        if out_dict is None:
+            out_dict = {}
+        for l, layer in enumerate(self.layers):
+            self.layers[l].save_parameters(
+                out_dict, prefix + 'Layer_' + str(l) + '/')
+        return out_dict
+
+    def load_parameters(self, data_dict, prefix=''):
+        """Loads the parameters saved by save_parameters()."""
+        for l, layer in enumerate(self.layers):
+            key = prefix + 'Layer_' + str(l) + '/'
+            part_dict = {k: v for k, v in data_dict.items() if k.startswith(key)}
+            layer.load_parameters(part_dict, key)

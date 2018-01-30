@@ -63,3 +63,37 @@ class LstmCell(object):
                 tf.convert_to_tensor(np_arrays[0]),
                 tf.convert_to_tensor(np_arrays[1])
             )
+
+
+class Lstm(object):
+    """
+    Several layers of LstmCells. Input is batch_size x num_steps x input_size.
+    """
+    def __init__(self, input_size, hidden_size, batch_size, num_layers):
+        super(Lstm, self).__init__()
+        self.input_size = input_size
+        self.hidden_size = hidden_size
+        self.batch_size = batch_size
+        self.num_layers = num_layers
+
+        self.layers = []
+        for l in range(num_layers):
+            with tf.variable_scope('Layer_' + str(l)):
+                cell = LstmCell(input_size, hidden_size, batch_size)
+                self.layers.append(cell)
+
+    def __call__(self, input, hiddens):
+        outputs = []
+        for i in range(input.get_shape()[1]):
+            # This is already batch_size x input_size, no need to squeeze
+            values = input[:, i, :]
+            for l in range(self.num_layers):
+                h_t, c_t = self.layers[l](values, hiddens[l])
+                values = h_t
+                hiddens[l] = h_t, c_t
+            outputs.append(values)
+        outputs = tf.stack(outputs, 1)
+        return outputs, hiddens
+
+    def init_hidden(self):
+        return [self.layers[l].init__hidden() for l in range(self.num_layers)]
