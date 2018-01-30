@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# vim: set fileencoding=utf-8 :
+
 import contextlib
 import os
 import unittest
@@ -62,6 +65,7 @@ class TestLstmCells(unittest.TestCase):
         # np.allclose(pti_value, tfi_d[name]for name, pti_value in pti_d.items()]
 
     def test_data_from_pytorch_to_tf(self):
+        """Tests data transfer from the pytorch cell to the tf one."""
         with self.__create_cells(
             self.input_size, self.hidden_size, self.batch_size
         ) as (pti_cell, tfi_cell, session):
@@ -72,7 +76,6 @@ class TestLstmCells(unittest.TestCase):
 
     def test_data_from_tf_to_pytorch(self):
         """Tests data transfer from the tf cell to the pytorch one."""
-
         with self.__create_cells(
             self.input_size, self.hidden_size, self.batch_size
         ) as (pti_cell, tfi_cell, session):

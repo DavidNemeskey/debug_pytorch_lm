@@ -23,6 +23,12 @@ class LstmCell(object):
             self.weights += [self.b_i, self.b_h]
 
     def save_parameters(self, session, out_dict=None):
+        """
+        Saves the parameters into a dictionary that can later be e.g. savez'd.
+        It is different from the Pytorch version in that the prefix of the
+        variables is determined by the variable (/name?) scopes used when the
+        cell was defined.
+        """
         if out_dict is None:
             out_dict = {}
         for w in self.weights:
@@ -97,3 +103,21 @@ class Lstm(object):
 
     def init_hidden(self):
         return [self.layers[l].init__hidden() for l in range(self.num_layers)]
+
+    def save_parameters(self, session, out_dict=None):
+        """
+        Saves the parameters into a dictionary that can later be e.g. savez'd.
+        It is different from the Pytorch version in that the prefix of the
+        variables is determined by the variable (/name?) scopes used when the
+        cell was defined.
+        """
+        if out_dict is None:
+            out_dict = {}
+        for layer in self.layers:
+            layer.save_parameters(session, out_dict)
+        return out_dict
+
+    def load_parameters(self, session, data_dict):
+        """Loads the parameters saved by save_parameters()."""
+        for layer in self.layers:
+            layer.load_parameters(session, data_dict)
