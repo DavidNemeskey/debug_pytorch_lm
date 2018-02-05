@@ -104,19 +104,56 @@ class TestLstms(unittest.TestCase):
 
             # Initial states
             pti_hidden = pti_lstm.init_hidden(2)
+            tfi_hidden_np = [[v.data.cpu().numpy() for v in l] for l in pti_hidden]
             tfi_init_state = tfi_lstm.init_hidden()
             tfi_output, tfi_final_state = tfi_lstm(tfi_input, tfi_init_state)
 
             # Pytorch
             pti_lstm.zero_grad()
             pti_output, pti_final_state = pti_lstm.forward(pti_input, pti_hidden)
-            print(pti_target.size(), pti_output.size())
-#            pti_loss = (pti_h - Variable(torch.FloatTensor([0, 1]))).norm(2)
-#            pti_loss.backward(retain_graph=True)
-#            pti_h_np, pti_c_np = (v.data.cpu().numpy() for v in (pti_h, pti_c))
-#            pti_loss_np = pti_loss.data[0]
-#            pti_grads_dict = {name: p.grad.data.cpu().numpy()
-#                              for name, p in pti_cell.named_parameters()}
+            pti_loss = (pti_output.mean(2) - pti_target).norm(2)
+            pti_loss.backward()
+            pti_final_state_np = [[a.data.cpu().numpy() for a in l]
+                                  for l in pti_final_state]
+            pti_loss_np = pti_loss.data[0]
+            pti_grads_dict = {l: {name: p.grad.data.cpu().numpy()
+                                  for name, p in layer.named_parameters()}
+                              for l, layer in enumerate(pti_lstm.layers)}
+
+            # Tensorflow
+            tfi_loss = tf.norm(tf.reduce_mean(tfi_output, axis=2) - tfi_target, 2)
+            tfi_grad_vars = [w for l in tfi_lstm.layers for w in l.weights]
+            tfi_gradients = tf.gradients(tfi_loss, tfi_grad_vars)
+            tfi_feed_dict = {tfi_input: input_np,
+                             tfi_target: target_np,
+                             tuple(tfi_init_state): tuple(tfi_hidden_np)}
+            tfi_output_np, tfi_final_state_np, tfi_loss_np, tfi_grads_list = session.run(
+                [tfi_output, tfi_final_state, tfi_loss, tfi_gradients], tfi_feed_dict)
+            tfi_grads_dict = {
+                l: {
+                    name: tfi_grads_list[tfi_grad_vars.index(getattr(layer, name))]
+                    for name in pti_grads_dict[l]
+                }
+                for l, layer in enumerate(tfi_lstm.layers)
+            }
+
+            # The tests
+            with self.subTest(name='state'):
+                for layer in range(len(pti_final_state_np)):
+                    for hc in range(2):
+                        self.assertTrue(np.allclose(
+                            pti_final_state_np[layer][hc],
+                            tfi_final_state_np[layer][hc],
+                        ))
+
+            with self.subTest(name='loss'):
+                self.assertTrue(np.allclose(tfi_loss_np, pti_loss_np))
+
+            with self.subTest(name='gradients'):
+                for layer, pti_grads in pti_grads_dict.items():
+                    for name, pti_value in pti_grads.items():
+                        self.assertTrue(np.allclose(
+                            pti_value, tfi_grads_dict[layer][name]))
 
 
 if __name__ == '__main__':

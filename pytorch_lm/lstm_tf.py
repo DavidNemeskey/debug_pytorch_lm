@@ -91,6 +91,7 @@ class Lstm(object):
 
     def __call__(self, input, hiddens):
         outputs = []
+        hiddens = [h for h in hiddens]
         for i in range(input.get_shape()[1]):
             # This is already batch_size x input_size, no need to squeeze
             values = input[:, i, :]
