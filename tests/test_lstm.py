@@ -14,7 +14,7 @@ import pytorch_lm.lstm_pytorch as pti
 import pytorch_lm.lstm_tf as tfi
 
 
-class TestLstmCells(unittest.TestCase):
+class TestLstms(unittest.TestCase):
     """Tests that the two LSTM cell implementations work alike."""
     def setUp(self):
         self.input_size = 2
@@ -77,4 +77,47 @@ class TestLstmCells(unittest.TestCase):
         """Tests data transfer from the tf LSTM to the pytorch one."""
         with self.__create_lstms(batch_size=4) as (pti_lstm, tfi_lstm, session):
             tfi_d = tfi_lstm.save_parameters(session)
-            pti_lstm.load_parameters(tfi_d, prefix='Model/')
+            pti_lstm.load_parameters(tfi_d, prefix='Lstm/')
+
+            self.__assert_parameters_equals(pti_lstm, tfi_lstm, session)
+
+    def test_sequence_tagging(self):
+        """Tests sequence tagging (i.e. the output)."""
+        with self.__create_lstms() as (pti_lstm, tfi_lstm, session):
+            tfi_lstm.load_parameters(session, self.weights)
+            pti_lstm.load_parameters(self.weights, prefix='Lstm/')
+
+            # Input
+            input_np = np.array(
+                [
+                    [[1, 2], [2, 4], [2, 3]],
+                    [[1, 1], [2, 2], [3, 3]]
+                ],
+                dtype=np.float32
+            )
+            pti_input = Variable(torch.FloatTensor(input_np))
+            tfi_input = tf.placeholder(tf.float32, input_np.shape)
+            # Target (arithmetic mean)
+            target_np = np.array([[1.5, 3, 2.5], [1, 2, 3]], dtype=np.float32)
+            pti_target = Variable(torch.FloatTensor(target_np))
+            tfi_target = tf.placeholder(tf.float32, target_np.shape)
+
+            # Initial states
+            pti_hidden = pti_lstm.init_hidden(2)
+            tfi_init_state = tfi_lstm.init_hidden()
+            tfi_output, tfi_final_state = tfi_lstm(tfi_input, tfi_init_state)
+
+            # Pytorch
+            pti_lstm.zero_grad()
+            pti_output, pti_final_state = pti_lstm.forward(pti_input, pti_hidden)
+            print(pti_target.size(), pti_output.size())
+#            pti_loss = (pti_h - Variable(torch.FloatTensor([0, 1]))).norm(2)
+#            pti_loss.backward(retain_graph=True)
+#            pti_h_np, pti_c_np = (v.data.cpu().numpy() for v in (pti_h, pti_c))
+#            pti_loss_np = pti_loss.data[0]
+#            pti_grads_dict = {name: p.grad.data.cpu().numpy()
+#                              for name, p in pti_cell.named_parameters()}
+
+
+if __name__ == '__main__':
+    unittest.main()

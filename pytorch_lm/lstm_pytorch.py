@@ -103,8 +103,8 @@ class Lstm(nn.Module):
         self.hidden_size = hidden_size
         self.num_layers = num_layers
 
-        self.layers = [LstmCell(input_size, hidden_size)
-                       for _ in range(num_layers)]
+        self.layers = [LstmCell(input_size if not l else hidden_size, hidden_size)
+                       for l in range(num_layers)]
 
     def forward(self, input, hiddens):
         outputs = []

@@ -85,7 +85,8 @@ class Lstm(object):
         self.layers = []
         for l in range(num_layers):
             with tf.variable_scope('Layer_' + str(l)):
-                cell = LstmCell(input_size, hidden_size, batch_size)
+                cell = LstmCell(input_size if not l else hidden_size,
+                                hidden_size, batch_size)
                 self.layers.append(cell)
 
     def __call__(self, input, hiddens):
@@ -102,7 +103,7 @@ class Lstm(object):
         return outputs, hiddens
 
     def init_hidden(self):
-        return [self.layers[l].init__hidden() for l in range(self.num_layers)]
+        return [self.layers[l].init_hidden() for l in range(self.num_layers)]
 
     def save_parameters(self, session, out_dict=None):
         """
