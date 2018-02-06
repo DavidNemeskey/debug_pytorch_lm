@@ -59,7 +59,7 @@ class TestLstms(unittest.TestCase):
         equals = []
         for l, pti_cell in enumerate(pti_lstm.layers):
             tfi_cell = tfi_lstm.layers[l]
-            for name, _ in pti_lstm.named_parameters():
+            for name, _ in pti_cell.named_parameters():
                 pti_value = getattr(pti_cell, name).data.cpu().numpy()
                 tfi_value = session.run(getattr(tfi_cell, name))
                 equals.append(np.allclose(pti_value, tfi_value))
@@ -124,11 +124,14 @@ class TestLstms(unittest.TestCase):
             tfi_loss = tf.norm(tf.reduce_mean(tfi_output, axis=2) - tfi_target, 2)
             tfi_grad_vars = [w for l in tfi_lstm.layers for w in l.weights]
             tfi_gradients = tf.gradients(tfi_loss, tfi_grad_vars)
+            tfi_optimizer = tf.train.GradientDescentOptimizer(1)
+            tfi_train_op = tfi_optimizer.apply_gradients(zip(tfi_gradients, tfi_grad_vars))
             tfi_feed_dict = {tfi_input: input_np,
                              tfi_target: target_np,
                              tuple(tfi_init_state): tuple(tfi_hidden_np)}
-            tfi_output_np, tfi_final_state_np, tfi_loss_np, tfi_grads_list = session.run(
-                [tfi_output, tfi_final_state, tfi_loss, tfi_gradients], tfi_feed_dict)
+            tfi_output_np, tfi_final_state_np, tfi_loss_np, tfi_grads_list, _ = session.run(
+                [tfi_output, tfi_final_state, tfi_loss, tfi_gradients, tfi_train_op],
+                tfi_feed_dict)
             tfi_grads_dict = {
                 l: {
                     name: tfi_grads_list[tfi_grad_vars.index(getattr(layer, name))]
@@ -154,6 +157,11 @@ class TestLstms(unittest.TestCase):
                     for name, pti_value in pti_grads.items():
                         self.assertTrue(np.allclose(
                             pti_value, tfi_grads_dict[layer][name]))
+
+            # Apply the loss on both
+            for p in pti_lstm.parameters():
+                p.data.add_(-p.grad.data)
+            self.__assert_parameters_equals(pti_lstm, tfi_lstm, session)
 
 
 if __name__ == '__main__':
