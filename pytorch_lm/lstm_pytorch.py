@@ -105,6 +105,8 @@ class Lstm(nn.Module):
 
         self.layers = [LstmCell(input_size if not l else hidden_size, hidden_size)
                        for l in range(num_layers)]
+        for l, layer in enumerate(self.layers):
+            self.add_module('Layer_{}'.format(l), layer)
 
     def forward(self, input, hiddens):
         outputs = []
