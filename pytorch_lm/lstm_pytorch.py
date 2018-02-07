@@ -57,6 +57,8 @@ class LstmCell(nn.Module):
 
     def forward(self, input, hidden):
         h_t, c_t = hidden
+        # print('INPUT CELL', input.size(), 'H_T', h_t.size(), 'W_I', self.w_i.size(),
+        #       'W_H', self.w_h.size())
 
         ifgo = input.matmul(self.w_i) + h_t.matmul(self.w_h)
 
@@ -109,6 +111,7 @@ class Lstm(nn.Module):
             self.add_module('Layer_{}'.format(l), layer)
 
     def forward(self, input, hiddens):
+        print('III', input.size(), type(hiddens))
         outputs = []
         # chunk() cuts batch_size x 1 x input_size chunks from input
         for input_t in input.chunk(input.size(1), dim=1):

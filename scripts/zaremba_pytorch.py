@@ -27,7 +27,7 @@ class SmallZarembaModel(nn.Module):
     def __init__(self, vocab_size):
         super(SmallZarembaModel, self).__init__()
         self.hidden_size = 200
-        self.input_size = 1
+        self.input_size = 200
         self.num_layers = 2
 
         self.encoder = nn.Embedding(vocab_size, self.hidden_size)
@@ -41,7 +41,9 @@ class SmallZarembaModel(nn.Module):
         self.decoder.weight.data.uniform_(-initrange, initrange)
 
     def forward(self, input, hidden):
+        print('INPUT', input.size())
         emb = self.encoder(input)
+        print('EMB', emb.size())
         # self.rnn.flatten_parameters()
         output, hidden = self.rnn(emb, hidden)
         decoded = self.decoder(
@@ -60,11 +62,11 @@ def parse_arguments():
     parser.add_argument('--data', '-d', type=str, default='./data/wikitext-2',
                         help='location of the data corpus (files called '
                              'train|valid|test.txt).')
-    parser.add_argument('--model', type=str, default='LSTM',
+    parser.add_argument('--model', '-m', type=str, default='LSTM',
                         help='the model key name.')
-    parser.add_argument('--seed', type=int, default=1111, help='random seed')
-    parser.add_argument('--cuda', action='store_true', help='use CUDA')
-    parser.add_argument('--log-interval', type=int, default=200, metavar='N',
+    parser.add_argument('--seed', '-s', type=int, default=1111, help='random seed')
+    parser.add_argument('--cuda', '-c', action='store_true', help='use CUDA')
+    parser.add_argument('--log-interval', '-l', type=int, default=200, metavar='N',
                         help='report interval')
     return parser.parse_args()
 
@@ -86,15 +88,17 @@ def batchify(data, bsz, cuda):
     # Work out how cleanly we can divide the dataset into bsz parts.
     nbatch = data.size(0) // bsz
     # Trim off any extra elements that wouldn't cleanly fit (remainders).
-    data = data.narrow(0, 0, nbatch * bsz)
+    data = data.narrow(0, 0, nbatch * bsz).contiguous()
     # Evenly divide the data across the bsz batches.
-    data = data.view(bsz, -1).t().contiguous()
+    # data = data.view(bsz, -1).t().contiguous()
+    data = data.view(bsz, -1)
     if cuda:
         data = data.cuda()
+    print('DS', data.size())
     return data
 
 
-def get_batch(source, i, bptt, evaluation=False):
+def get_batch(source, i, num_steps, evaluation=False):
     """
     get_batch subdivides the source data into chunks of length bptt.
     If source is equal to the example output of the batchify function, with
@@ -106,33 +110,39 @@ def get_batch(source, i, bptt, evaluation=False):
     by the batchify function. The chunks are along dimension 0, corresponding
     to the seq_len dimension in the LSTM.
     """
-    seq_len = min(bptt, len(source) - 1 - i)
+    seq_len = min(num_steps, source.size(1) - 1 - i)
     # TODO can we no_grad target as well?
+    data_chunk = source[:, i:i+seq_len].contiguous()
+    target_chunk = source[:, i+1:i+1+seq_len].contiguous()  # .view(-1))
     if evaluation:
         with torch.no_grad():
-            data = Variable(source[i:i+seq_len])
+            data = Variable(data_chunk)
     else:
-        data = Variable(source[i:i+seq_len])
-    target = Variable(source[i+1:i+1+seq_len])  # .view(-1))
+        data = Variable(data_chunk)
+    target = Variable(target_chunk)  # .view(-1))
     return data, target
 
 
 def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
           num_steps, log_interval):
     # Turn on training mode which enables dropout.
+    print('TRAIN', epoch)
     model.train()
     total_loss = 0
     start_time = time.time()
-    ntokens = len(corpus.dictionary)
+    vocab_size = len(corpus.dictionary)
     hidden = model.init_hidden(batch_size)
     for batch, i in enumerate(range(0, train_data.size(0) - 1, num_steps)):
+        print('FOR', batch, i)
         data, targets = get_batch(train_data, i, num_steps)
 
         def to_str(f):
             return corpus.dictionary.idx2word[f]
 
         # print(data.data.cpu().numpy())
+        # import numpy as np
         # print('DATA\n', np.vectorize(to_str)(data.data.cpu().numpy()))
+        # print('TARGET\n', np.vectorize(to_str)(targets.data.cpu().numpy()))
         # print(targets.data.cpu().numpy())
         # Starting each batch, we detach the hidden state from how it was previously produced.
         # If we didn't, the model would try backpropagating all the way to start of the dataset.
@@ -142,7 +152,7 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
         # print('TARGETS\n', np.vectorize(to_str)(targets.data.cpu().numpy()))
         # _, indices = output.max(2)
         # print('OUTPUT\n', np.vectorize(to_str)(indices.data.cpu().numpy()))
-        loss = criterion(output.view(-1, ntokens), targets.view(-1))
+        loss = criterion(output.view(-1, vocab_size), targets.view(-1))
         loss.backward()
 
         # `clip_grad_norm` helps prevent the exploding gradient problem in RNNs / LSTMs.
@@ -182,12 +192,12 @@ def evaluate(model, corpus, data_source, criterion, batch_size, num_steps):
     # Turn on evaluation mode which disables dropout.
     model.eval()
     total_loss = 0
-    ntokens = len(corpus.dictionary)
+    vocab_size = len(corpus.dictionary)
     hidden = model.init_hidden(batch_size)
     for i in range(0, data_source.size(0) - 1, num_steps):
         data, targets = get_batch(data_source, i, num_steps, evaluation=True)
         output, hidden = model(data, hidden)
-        output_flat = output.view(-1, ntokens)
+        output_flat = output.view(-1, vocab_size)
         targets_flat = targets.view(-1)
         total_loss += len(data) * criterion(output_flat, targets_flat).data
         hidden = repackage_hidden(hidden)
@@ -199,7 +209,7 @@ def repackage_hidden(h):
     if type(h) == Variable:
         return Variable(h.data)
     else:
-        return tuple(repackage_hidden(v) for v in h)
+        return [repackage_hidden(v) for v in h]
 
 
 def main():
