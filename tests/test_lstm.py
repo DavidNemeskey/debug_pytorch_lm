@@ -17,9 +17,9 @@ import pytorch_lm.lstm_tf as tfi
 class TestLstms(unittest.TestCase):
     """Tests that the two LSTM cell implementations work alike."""
     def setUp(self):
-        self.input_size = 2
-        self.hidden_size = 3
-        self.batch_size = 2
+        self.input_size = 5
+        self.hidden_size = 4
+        self.batch_size = 3
         self.num_layers = 2
 
         weight_file = os.path.join(os.path.dirname(__file__), 'lstm.npz')
@@ -90,20 +90,21 @@ class TestLstms(unittest.TestCase):
             # Input
             input_np = np.array(
                 [
-                    [[1, 2], [2, 4], [2, 3]],
-                    [[1, 1], [2, 2], [3, 3]]
+                    [[1, 2, 1, 2, 1.5], [2, 4, 2, 4, 3], [2, 3, 2, 3, 2.5]],
+                    [[1, 1, 1, 1, 1], [2, 2, 2, 2, 2], [3, 3, 3, 3, 3]],
+                    [[1, 1, 1, 1, 1], [2, 2, 2, 2, 2], [3, 3, 3, 3, 3]]
                 ],
                 dtype=np.float32
             )
             pti_input = Variable(torch.FloatTensor(input_np))
             tfi_input = tf.placeholder(tf.float32, input_np.shape)
             # Target (arithmetic mean)
-            target_np = np.array([[1.5, 3, 2.5], [1, 2, 3]], dtype=np.float32)
+            target_np = np.array([[1.5, 3, 2.5], [1, 2, 3], [1, 2, 3]], dtype=np.float32)
             pti_target = Variable(torch.FloatTensor(target_np))
             tfi_target = tf.placeholder(tf.float32, target_np.shape)
 
             # Initial states
-            pti_hidden = pti_lstm.init_hidden(2)
+            pti_hidden = pti_lstm.init_hidden(self.batch_size)
             tfi_hidden_np = [[v.data.cpu().numpy() for v in l] for l in pti_hidden]
             tfi_init_state = tfi_lstm.init_hidden()
             tfi_output, tfi_final_state = tfi_lstm(tfi_input, tfi_init_state)
