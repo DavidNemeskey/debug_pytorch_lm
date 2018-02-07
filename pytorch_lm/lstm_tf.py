@@ -75,12 +75,12 @@ class Lstm(object):
     """
     Several layers of LstmCells. Input is batch_size x num_steps x input_size.
     """
-    def __init__(self, input_size, hidden_size, batch_size, num_layers):
+    def __init__(self, input_size, hidden_size, num_layers, batch_size):
         super(Lstm, self).__init__()
         self.input_size = input_size
         self.hidden_size = hidden_size
-        self.batch_size = batch_size
         self.num_layers = num_layers
+        self.batch_size = batch_size
 
         self.layers = []
         for l in range(num_layers):
