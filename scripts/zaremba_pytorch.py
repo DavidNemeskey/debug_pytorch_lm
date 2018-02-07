@@ -132,7 +132,7 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
     start_time = time.time()
     vocab_size = len(corpus.dictionary)
     hidden = model.init_hidden(batch_size)
-    for batch, i in enumerate(range(0, train_data.size(0) - 1, num_steps)):
+    for batch, i in enumerate(range(0, train_data.size(1) - 1, num_steps)):
         print('FOR', batch, i)
         data, targets = get_batch(train_data, i, num_steps)
 
@@ -194,7 +194,7 @@ def evaluate(model, corpus, data_source, criterion, batch_size, num_steps):
     total_loss = 0
     vocab_size = len(corpus.dictionary)
     hidden = model.init_hidden(batch_size)
-    for i in range(0, data_source.size(0) - 1, num_steps):
+    for i in range(0, data_source.size(1) - 1, num_steps):
         data, targets = get_batch(data_source, i, num_steps, evaluation=True)
         output, hidden = model(data, hidden)
         output_flat = output.view(-1, vocab_size)
