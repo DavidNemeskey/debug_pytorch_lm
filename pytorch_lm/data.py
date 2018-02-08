@@ -1,5 +1,6 @@
 import os
-import torch
+
+import numpy as np
 
 class Dictionary(object):
     def __init__(self):
@@ -37,7 +38,7 @@ class Corpus(object):
 
         # Tokenize file content
         with open(path, 'r') as f:
-            ids = torch.LongTensor(tokens)
+            ids = np.zeros([tokens], dtype=np.int32)
             token = 0
             for line in f:
                 words = line.split() + ['<eos>']
