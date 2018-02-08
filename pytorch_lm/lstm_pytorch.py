@@ -95,6 +95,8 @@ class LstmCell(nn.Module):
         print('CUDA?', ret[0].is_cuda, next(self.parameters()).is_cuda)
         if next(self.parameters()).is_cuda:
             return tuple(t.cuda() for t in ret)
+        else:
+            return ret
 
 class Lstm(nn.Module):
     """
