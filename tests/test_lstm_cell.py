@@ -35,7 +35,7 @@ class TestLstmCells(unittest.TestCase):
         self.initial_hidden = tuple(states[k] for k in ['h', 'c'])
 
     @contextlib.contextmanager
-    def __create_cells(self, input_size, hidden_size, batch_size):
+    def __create_cells(self, input_size, hidden_size, batch_size, cuda=False):
         """
         Helper method. Creates three objects:
         - a pytorch LstmCell
@@ -43,6 +43,8 @@ class TestLstmCells(unittest.TestCase):
         - a session for the latter.
         """
         pti_cell = pti.LstmCell(input_size, hidden_size)
+        if cuda:
+            pti_cell.cuda()
 
         with tf.Graph().as_default() as graph:
             initializer = tf.random_uniform_initializer(-0.1, 0.1)
@@ -64,31 +66,51 @@ class TestLstmCells(unittest.TestCase):
         self.assertTrue(all(equals))
         # np.allclose(pti_value, tfi_d[name]for name, pti_value in pti_d.items()]
 
-    def test_data_from_pytorch_to_tf(self):
+    def __test_data_from_pytorch_to_tf(self, cuda):
         """Tests data transfer from the pytorch cell to the tf one."""
         with self.__create_cells(
-            self.input_size, self.hidden_size, self.batch_size
+            self.input_size, self.hidden_size, self.batch_size, cuda=cuda
         ) as (pti_cell, tfi_cell, session):
             pti_d = pti_cell.save_parameters(prefix='Model/')
             tfi_cell.load_parameters(session, pti_d)
 
             self.__assert_cell_state_equals(pti_cell, tfi_cell, session)
 
-    def test_data_from_tf_to_pytorch(self):
+    def test_data_from_pytorch_to_tf(self):
+        """Tests data transfer from the pytorch cell to the tf one."""
+        with self.subTest(name='cpu'):
+            self.__test_data_from_pytorch_to_tf(False)
+        with self.subTest(name='gpu'):
+            if not torch.cuda.is_available():
+                self.skipTest('CUDA test: a GPU is not available.')
+            self.__test_data_from_pytorch_to_tf(True)
+
+    def __test_data_from_tf_to_pytorch(self, cuda):
         """Tests data transfer from the tf cell to the pytorch one."""
         with self.__create_cells(
-            self.input_size, self.hidden_size, self.batch_size
+            self.input_size, self.hidden_size, self.batch_size, cuda=cuda
         ) as (pti_cell, tfi_cell, session):
             tfi_d = tfi_cell.save_parameters(session)
             pti_cell.load_parameters(tfi_d, prefix='Model/')
 
             self.__assert_cell_state_equals(pti_cell, tfi_cell, session)
 
-    def __run_loss_and_grad(self, pti_cell, tfi_cell, session, hidden_np):
+    def test_data_from_tf_to_pytorch(self):
+        """Tests data transfer from the tf cell to the pytorch one."""
+        with self.subTest(name='cpu'):
+            self.__test_data_from_tf_to_pytorch(False)
+        with self.subTest(name='gpu'):
+            if not torch.cuda.is_available():
+                self.skipTest('CUDA test: a GPU is not available.')
+            self.__test_data_from_tf_to_pytorch(True)
+
+    def __run_loss_and_grad(self, pti_cell, tfi_cell, session, hidden_np, cuda):
             # Input
             input_np = np.array([[1, 2, 3], [1, 2, 3], [2, 3, 4], [2, 3, 4]],
                                 dtype=np.float32)
             pti_input = Variable(torch.FloatTensor(input_np))
+            if cuda:
+                pti_input.cuda()
             tfi_input = tf.placeholder(tf.float32, [self.batch_size, self.input_size])
 
             # Initial states
@@ -122,10 +144,10 @@ class TestLstmCells(unittest.TestCase):
             return ((pti_h_np, pti_c_np), (tfi_h_np, tfi_c_np),
                     pti_loss_np, tfi_loss_np, pti_grads_dict, tfi_grads_dict)
 
-    def __run_one_step(self, hidden_np):
+    def __run_one_step(self, hidden_np, cuda=False):
         """Runs one step from a user-specified hidden state."""
         with self.__create_cells(
-            self.input_size, self.hidden_size, self.batch_size
+            self.input_size, self.hidden_size, self.batch_size, cuda=cuda
         ) as (pti_cell, tfi_cell, session):
             tfi_cell.load_parameters(session, self.weights)
             pti_cell.load_parameters(self.weights, prefix='Model/')
@@ -160,7 +182,12 @@ class TestLstmCells(unittest.TestCase):
             np.zeros((self.batch_size, self.hidden_size), dtype=np.float32),
             np.zeros((self.batch_size, self.hidden_size), dtype=np.float32)
         )
-        self.__run_one_step(hidden_np)
+        with self.subTest(name='cpu'):
+            self.__run_one_step(hidden_np, False)
+        with self.subTest(name='gpu'):
+            if not torch.cuda.is_available():
+                self.skipTest('CUDA test: a GPU is not available.')
+            self.__run_one_step(hidden_np, True)
 
     def test_from_state(self):
         """
