@@ -41,9 +41,9 @@ class SmallZarembaModel(nn.Module):
         self.decoder.weight.data.uniform_(-initrange, initrange)
 
     def forward(self, input, hidden):
-        print('INPUT', input.size())
+        # print('INPUT', input.size())
         emb = self.encoder(input)
-        print('EMB', emb.size())
+        # print('EMB', emb.size())
         # self.rnn.flatten_parameters()
         output, hidden = self.rnn(emb, hidden)
         decoded = self.decoder(
@@ -133,7 +133,7 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
     vocab_size = len(corpus.dictionary)
     hidden = model.init_hidden(batch_size)
     for batch, i in enumerate(range(0, train_data.size(1) - 1, num_steps)):
-        print('FOR', batch, i)
+        # print('FOR', batch, i, (train_data.size(1) - 1) // num_steps)
         data, targets = get_batch(train_data, i, num_steps)
 
         def to_str(f):

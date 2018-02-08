@@ -111,7 +111,7 @@ class Lstm(nn.Module):
             self.add_module('Layer_{}'.format(l), layer)
 
     def forward(self, input, hiddens):
-        print('III', input.size(), type(hiddens))
+        # print('III', input.size(), type(hiddens))
         outputs = []
         # chunk() cuts batch_size x 1 x input_size chunks from input
         for input_t in input.chunk(input.size(1), dim=1):
