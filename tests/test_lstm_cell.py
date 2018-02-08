@@ -56,6 +56,24 @@ class TestLstmCells(unittest.TestCase):
             session.run(init)
             yield pti_cell, tfi_cell, session
 
+    @unittest.skipUnless(torch.cuda.is_available(),
+                         'CUDA test: a GPU is not available.')
+    def test_cuda(self):
+        """Tests if the Pytorch cell works on the GPU."""
+        with self.__create_cells(
+            self.input_size, self.hidden_size, self.batch_size, cuda=False
+        ) as (pti_cell, tfi_cell, session):
+            self.assertFalse(next(pti_cell.parameters()).is_cuda)
+            pti_cell.load_parameters(pti_cell.save_parameters())
+            self.assertFalse(next(pti_cell.parameters()).is_cuda)
+
+        with self.__create_cells(
+            self.input_size, self.hidden_size, self.batch_size, cuda=True
+        ) as (pti_cell, tfi_cell, session):
+            self.assertTrue(next(pti_cell.parameters()).is_cuda)
+            pti_cell.load_parameters(pti_cell.save_parameters())
+            self.assertTrue(next(pti_cell.parameters()).is_cuda)
+
     def __assert_cell_state_equals(self, pti_cell, tfi_cell, session):
         """Checks if the state vectors of the two cells are the same."""
         equals = []

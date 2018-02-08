@@ -3,7 +3,6 @@
 
 import contextlib
 import os
-import sys
 import unittest
 
 import numpy as np
@@ -56,6 +55,20 @@ class TestLstms(unittest.TestCase):
         with tf.Session(graph=graph) as session:
             session.run(init)
             yield pti_lstm, tfi_lstm, session
+
+    @unittest.skipUnless(torch.cuda.is_available(),
+                         'CUDA test: a GPU is not available.')
+    def test_cuda(self):
+        """Tests if the Pytorch network works on the GPU."""
+        with self.__create_lstms(cuda=False) as (pti_lstm, tfi_lstm, session):
+            self.assertFalse(next(pti_lstm.parameters()).is_cuda)
+            pti_lstm.load_parameters(pti_lstm.save_parameters())
+            self.assertFalse(next(pti_lstm.parameters()).is_cuda)
+
+        with self.__create_lstms(cuda=True) as (pti_lstm, tfi_lstm, session):
+            self.assertTrue(next(pti_lstm.parameters()).is_cuda)
+            pti_lstm.load_parameters(pti_lstm.save_parameters())
+            self.assertTrue(next(pti_lstm.parameters()).is_cuda)
 
     def __assert_parameters_equals(self, pti_lstm, tfi_lstm, session):
         """Checks if the state vectors of the two LSTM networks are the same."""
