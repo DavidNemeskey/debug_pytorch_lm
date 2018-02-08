@@ -85,7 +85,7 @@ def batchify(data, bsz, cuda):
     dependence of e. g. 'g' on 'f' can not be learned, but allows more efficient
     batch processing.
     """
-    data = torch.from_numpy(data)
+    data = torch.from_numpy(data).long()
     # Work out how cleanly we can divide the dataset into bsz parts.
     nbatch = data.size(0) // bsz
     # Trim off any extra elements that wouldn't cleanly fit (remainders).
