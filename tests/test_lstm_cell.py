@@ -44,7 +44,7 @@ class TestLstmCells(unittest.TestCase):
         """
         pti_cell = pti.LstmCell(input_size, hidden_size)
         if cuda:
-            pti_cell.cuda()
+            pti_cell = pti_cell.cuda()
 
         with tf.Graph().as_default() as graph:
             initializer = tf.random_uniform_initializer(-0.1, 0.1)
@@ -110,7 +110,7 @@ class TestLstmCells(unittest.TestCase):
                                 dtype=np.float32)
             pti_input = Variable(torch.FloatTensor(input_np))
             if cuda:
-                pti_input.cuda()
+                pti_input = pti_input.cuda()
             tfi_input = tf.placeholder(tf.float32, [self.batch_size, self.input_size])
 
             # Initial states
@@ -122,12 +122,16 @@ class TestLstmCells(unittest.TestCase):
             # Pytorch
             pti_cell.zero_grad()
             pti_h, pti_c = pti_cell.forward(pti_input, pti_hidden)
-            pti_loss = (pti_h - Variable(torch.FloatTensor([0, 1]))).norm(2)
+            pti_target = Variable(torch.FloatTensor([0, 1]))
+            if cuda:
+                pti_target = pti_target.cuda()
+            pti_loss = (pti_h - pti_target).norm(2)
             pti_loss.backward(retain_graph=True)
             pti_h_np, pti_c_np = (v.data.cpu().numpy() for v in (pti_h, pti_c))
             pti_loss_np = pti_loss.data[0]
             pti_grads_dict = {name: p.grad.data.cpu().numpy()
                               for name, p in pti_cell.named_parameters()}
+            print('LOSS CUDA', pti_loss.is_cuda)
 
             # Tensorflow
             tfi_loss = tf.norm((tfi_final_state[0] - tf.constant([0, 1.0])))
@@ -154,7 +158,7 @@ class TestLstmCells(unittest.TestCase):
 
             ((pti_h_np, pti_c_np), (tfi_h_np, tfi_c_np),
              pti_loss_np, tfi_loss_np, pti_grads_dict, tfi_grads_dict) = \
-                self.__run_loss_and_grad(pti_cell, tfi_cell, session, hidden_np)
+                self.__run_loss_and_grad(pti_cell, tfi_cell, session, hidden_np, cuda)
 
             # The tests
             with self.subTest(name='state_1'):
@@ -194,7 +198,12 @@ class TestLstmCells(unittest.TestCase):
         Same as test_from_zero(), but starts from a randomly generated
         hidden state.
         """
-        self.__run_one_step(self.initial_hidden)
+        with self.subTest(name='cpu'):
+            self.__run_one_step(self.initial_hidden, False)
+        with self.subTest(name='gpu'):
+            if not torch.cuda.is_available():
+                self.skipTest('CUDA test: a GPU is not available.')
+            self.__run_one_step(self.initial_hidden, True)
 
 
 if __name__ == '__main__':
