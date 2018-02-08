@@ -31,7 +31,7 @@ class TestLstms(unittest.TestCase):
 
     @contextlib.contextmanager
     def __create_lstms(self, input_size=None, hidden_size=None,
-                       num_layers=None, batch_size=None):
+                       num_layers=None, batch_size=None, cuda=False):
         """
         Helper method. Creates three objects:
         - a pytorch Lstm
@@ -43,6 +43,8 @@ class TestLstms(unittest.TestCase):
         num_layers = num_layers or self.num_layers
         batch_size = batch_size or self.batch_size
         pti_lstm = pti.Lstm(input_size, hidden_size, num_layers)
+        if cuda:
+            pti_lstm.cuda()
 
         with tf.Graph().as_default() as graph:
             initializer = tf.random_uniform_initializer(-0.1, 0.1)
@@ -65,25 +67,45 @@ class TestLstms(unittest.TestCase):
                 equals.append(np.allclose(pti_value, tfi_value))
             self.assertTrue(all(equals))
 
-    def test_data_from_pytorch_to_tf(self):
-        """Tests data transfer from the pytorch LSTM to the tf one."""
-        with self.__create_lstms(batch_size=4) as (pti_lstm, tfi_lstm, session):
+    def __test_data_from_pytorch_to_tf(self, cuda):
+        with self.__create_lstms(batch_size=4, cuda=cuda) as (
+            pti_lstm, tfi_lstm, session
+        ):
             pti_d = pti_lstm.save_parameters(prefix='Lstm/')
             tfi_lstm.load_parameters(session, pti_d)
 
             self.__assert_parameters_equals(pti_lstm, tfi_lstm, session)
 
-    def test_data_from_tf_to_pytorch(self):
-        """Tests data transfer from the tf LSTM to the pytorch one."""
-        with self.__create_lstms(batch_size=4) as (pti_lstm, tfi_lstm, session):
+    def test_data_from_pytorch_to_tf(self):
+        """Tests data transfer from the pytorch LSTM to the tf one."""
+        with self.subTest(name='cpu'):
+            self.__test_data_from_pytorch_to_tf(False)
+        with self.subTest(name='gpu'):
+            if not torch.cuda.is_available():
+                self.skipTest('CUDA test: a GPU is not available.')
+            self.__test_data_from_pytorch_to_tf(True)
+
+    def __test_data_from_tf_to_pytorch(self, cuda):
+        with self.__create_lstms(batch_size=4, cuda=cuda) as (
+            pti_lstm, tfi_lstm, session
+        ):
             tfi_d = tfi_lstm.save_parameters(session)
             pti_lstm.load_parameters(tfi_d, prefix='Lstm/')
 
             self.__assert_parameters_equals(pti_lstm, tfi_lstm, session)
 
-    def test_sequence_tagging(self):
+    def test_data_from_tf_to_pytorch(self):
+        """Tests data transfer from the tf LSTM to the pytorch one."""
+        with self.subTest(name='cpu'):
+            self.__test_data_from_tf_to_pytorch(False)
+        with self.subTest(name='gpu'):
+            if not torch.cuda.is_available():
+                self.skipTest('CUDA test: a GPU is not available.')
+            self.__test_data_from_tf_to_pytorch(True)
+
+    def __test_sequence_tagging(self, cuda):
         """Tests sequence tagging (i.e. the output)."""
-        with self.__create_lstms() as (pti_lstm, tfi_lstm, session):
+        with self.__create_lstms(cuda=cuda) as (pti_lstm, tfi_lstm, session):
             tfi_lstm.load_parameters(session, self.weights)
             pti_lstm.load_parameters(self.weights, prefix='Lstm/')
 
@@ -163,6 +185,16 @@ class TestLstms(unittest.TestCase):
             for p in pti_lstm.parameters():
                 p.data.add_(-p.grad.data)
             self.__assert_parameters_equals(pti_lstm, tfi_lstm, session)
+
+    def test_sequence_tagging_cpu(self):
+        """Tests sequence tagging (i.e. the output) on the CPU."""
+        self.__test_sequence_tagging(False)
+
+    @unittest.skipUnless(torch.cuda.is_available(),
+                         'CUDA test: a GPU is not available.')
+    def test_sequence_tagging_gpu(self):
+        """Tests sequence tagging (i.e. the output) on the GPU."""
+        self.__test_sequence_tagging(True)
 
 
 if __name__ == '__main__':
