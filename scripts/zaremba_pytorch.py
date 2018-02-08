@@ -94,7 +94,6 @@ def batchify(data, bsz, cuda):
     data = data.view(bsz, -1)
     if cuda:
         data = data.cuda()
-    print('DS', data.size())
     return data
 
 
@@ -126,13 +125,13 @@ def get_batch(source, i, num_steps, evaluation=False):
 def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
           num_steps, log_interval):
     # Turn on training mode which enables dropout.
-    print('TRAIN', epoch)
     model.train()
     total_loss = 0
     start_time = time.time()
     vocab_size = len(corpus.dictionary)
+    len_data = train_data.size(1)
     hidden = model.init_hidden(batch_size)
-    for batch, i in enumerate(range(0, train_data.size(1) - 1, num_steps)):
+    for batch, i in enumerate(range(0, len_data - 1, num_steps)):
         # print('FOR', batch, i, (train_data.size(1) - 1) // num_steps)
         data, targets = get_batch(train_data, i, num_steps)
 
@@ -181,7 +180,7 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
             elapsed = time.time() - start_time
             print('| epoch {:3d} | {:5d}/{:5d} batches | lr {:02.2f} | '
                   'ms/batch {:5.2f} | loss {:5.2f} | ppl {:8.2f}'.format(
-                      epoch, batch, len(train_data) // num_steps, lr,
+                      epoch, batch, len_data // num_steps, lr,
                       elapsed * 1000 / log_interval, cur_loss, math.exp(cur_loss)),
                   flush=True)
             total_loss = 0
@@ -193,15 +192,16 @@ def evaluate(model, corpus, data_source, criterion, batch_size, num_steps):
     model.eval()
     total_loss = 0
     vocab_size = len(corpus.dictionary)
+    data_len = data_source.size(1)
     hidden = model.init_hidden(batch_size)
-    for i in range(0, data_source.size(1) - 1, num_steps):
+    for i in range(0, data_len - 1, num_steps):
         data, targets = get_batch(data_source, i, num_steps, evaluation=True)
         output, hidden = model(data, hidden)
         output_flat = output.view(-1, vocab_size)
         targets_flat = targets.view(-1)
         total_loss += len(data) * criterion(output_flat, targets_flat).data
         hidden = repackage_hidden(hidden)
-    return total_loss[0] / len(data_source)
+    return total_loss[0] / data_len
 
 
 def repackage_hidden(h):
@@ -271,17 +271,17 @@ def main():
                                              val_loss, math.exp(val_loss)))
             print('-' * 89)
             # Save the model if the validation loss is the best we've seen so far.
-            if not best_val_loss or val_loss < best_val_loss:
-                with open(args.save, 'wb') as f:
-                    torch.save(model, f)
-                best_val_loss = val_loss
+            # if not best_val_loss or val_loss < best_val_loss:
+            #     with open(args.save, 'wb') as f:
+            #         torch.save(model, f)
+            #     best_val_loss = val_loss
     except KeyboardInterrupt:
         print('-' * 89)
         print('Exiting from training early')
 
     # Load the best saved model.
-    with open(args.save, 'rb') as f:
-        model = torch.load(f)
+    # with open(args.save, 'rb') as f:
+    #     model = torch.load(f)
 
     # Run on test data.
     test_loss = evaluate(model, corpus, test_data,
