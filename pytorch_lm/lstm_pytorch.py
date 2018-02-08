@@ -51,14 +51,16 @@ class LstmCell(nn.Module):
 
     def load_parameters(self, data_dict, prefix=''):
         """Loads the parameters saved by save_parameters()."""
+        is_cuda = self.w_i.is_cuda
         for name, value in data_dict.items():
             real_name = name[len(prefix):]
-            setattr(self, real_name, nn.Parameter(torch.from_numpy(value)))
+            t = torch.from_numpy(value)
+            if is_cuda:
+                t = t.cuda()
+            setattr(self, real_name, nn.Parameter(t))
 
     def forward(self, input, hidden):
         h_t, c_t = hidden
-        # print('INPUT CELL', input.size(), 'H_T', h_t.size(), 'W_I', self.w_i.size(),
-        #       'W_H', self.w_h.size())
 
         ifgo = input.matmul(self.w_i) + h_t.matmul(self.w_h)
 
@@ -92,7 +94,6 @@ class LstmCell(nn.Module):
         elif np_arrays is not None:
             ret = (Variable(torch.from_numpy(np_arrays[0])),
                    Variable(torch.from_numpy(np_arrays[1])))
-        print('CUDA?', ret[0].is_cuda, next(self.parameters()).is_cuda)
         if next(self.parameters()).is_cuda:
             return tuple(t.cuda() for t in ret)
         else:

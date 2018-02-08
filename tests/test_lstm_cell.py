@@ -44,7 +44,7 @@ class TestLstmCells(unittest.TestCase):
         """
         pti_cell = pti.LstmCell(input_size, hidden_size)
         if cuda:
-            pti_cell = pti_cell.cuda()
+            pti_cell.cuda()
 
         with tf.Graph().as_default() as graph:
             initializer = tf.random_uniform_initializer(-0.1, 0.1)
@@ -131,7 +131,6 @@ class TestLstmCells(unittest.TestCase):
             pti_loss_np = pti_loss.data[0]
             pti_grads_dict = {name: p.grad.data.cpu().numpy()
                               for name, p in pti_cell.named_parameters()}
-            print('LOSS CUDA', pti_loss.is_cuda)
 
             # Tensorflow
             tfi_loss = tf.norm((tfi_final_state[0] - tf.constant([0, 1.0])))

@@ -3,6 +3,7 @@
 
 import contextlib
 import os
+import sys
 import unittest
 
 import numpy as np
@@ -119,10 +120,14 @@ class TestLstms(unittest.TestCase):
                 dtype=np.float32
             )
             pti_input = Variable(torch.FloatTensor(input_np))
+            if cuda:
+                pti_input = pti_input.cuda()
             tfi_input = tf.placeholder(tf.float32, input_np.shape)
             # Target (arithmetic mean)
             target_np = np.array([[1.5, 3, 2.5], [1, 2, 3], [1, 2, 3]], dtype=np.float32)
             pti_target = Variable(torch.FloatTensor(target_np))
+            if cuda:
+                pti_target = pti_target.cuda()
             tfi_target = tf.placeholder(tf.float32, target_np.shape)
 
             # Initial states
