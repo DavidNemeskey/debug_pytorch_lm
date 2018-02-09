@@ -18,7 +18,7 @@ import torch
 import torch.nn as nn
 from torch.autograd import Variable
 
-from pytorch_lm import data
+from pytorch_lm.data import Corpus
 from pytorch_lm.lstm_pytorch import Lstm
 
 
@@ -228,7 +228,7 @@ def main():
     # Load data
     ###############################################################################
 
-    corpus = data.Corpus(args.data)
+    corpus = Corpus(args.data)
 
     train_batch_size = 20
     eval_batch_size = 20
