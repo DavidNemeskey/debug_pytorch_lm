@@ -151,8 +151,9 @@ def batchify(data, bsz):
     """Same as the PT function, only we stay in numpy all along."""
     # Work out how cleanly we can divide the dataset into bsz parts.
     nbatch = len(data) // bsz
+    rbatch = 20 * ((nbatch - 1) // 20) + 1
     # Trim off any extra elements that wouldn't cleanly fit (remainders).
-    data = data[:nbatch * bsz]
+    data = data[:rbatch * bsz]
     # Evenly divide the data across the bsz batches.
     # data = data.view(bsz, -1).t().contiguous()
     data = data.reshape(bsz, -1)
@@ -231,7 +232,7 @@ def evaluate(sess, model, corpus, data_source, batch_size, num_steps):
         cost, output, hidden = sess.run(fetches, feed_dict)
         total_loss += cost
     # print('TOTAL LOSS', total_loss, 'LEN DATA', len(data_source), data_source.size())
-    return total_loss / len(data_source)
+    return total_loss / data_len
 
 
 def main():
