@@ -383,10 +383,10 @@ def main():
                 mtrain = SmallZarembaModel(True, vocab_size, train_batch_size, num_steps)
         with tf.name_scope('Valid'):
             with tf.variable_scope("Model", reuse=True, initializer=initializer):
-                mvalid = SmallZarembaModel(False, vocab_size, train_batch_size, num_steps)
+                mvalid = SmallZarembaModel(False, vocab_size, eval_batch_size, num_steps)
         with tf.name_scope('Test'):
             with tf.variable_scope("Model", reuse=True, initializer=initializer):
-                mtest = SmallZarembaModel(False, vocab_size, train_batch_size, num_steps)
+                mtest = SmallZarembaModel(False, vocab_size, eval_batch_size, num_steps)
         with tf.name_scope('Global_ops'):
             init = tf.global_variables_initializer()
 
