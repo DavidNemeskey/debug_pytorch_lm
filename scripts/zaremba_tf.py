@@ -341,8 +341,6 @@ def evaluate(sess, model, corpus, data_source, batch_size, num_steps):
 
     for i in range(0, data_len - 1, num_steps):
         data, targets = get_batch(data_source, i, num_steps, evaluation=True)
-        data = data.T
-        targets = targets.T
         feed_dict = {
             model.input_data: data,
             model.targets: targets,
