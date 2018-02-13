@@ -86,7 +86,7 @@ def batchify(data, bsz, cuda):
     batch processing.
     """
     # Work out how cleanly we can divide the dataset into bsz parts.
-    nbatch = data.size(0) // bsz
+    nbatch = len(data) // bsz
     rbatch = 20 * ((nbatch - 1) // 20) + 1
     # Trim off any extra elements that wouldn't cleanly fit (remainders).
     # data = data.narrow(0, 0, nbatch * bsz).contiguous()
