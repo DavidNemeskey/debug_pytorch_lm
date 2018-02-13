@@ -12,6 +12,7 @@ import math
 import time
 
 import tensorflow as tf
+import tensorflow.contrib.rnn as rnn
 
 from pytorch_lm.data import Corpus
 from pytorch_lm.lstm_tf import Lstm
@@ -145,6 +146,124 @@ def parse_arguments():
     parser.add_argument('--log-interval', '-l', type=int, default=200, metavar='N',
                         help='report interval')
     return parser.parse_args()
+
+
+class SmallZarembaModel2(object):
+    """"Implements the small model from Zaremba (2014)."""
+    def __init__(self, is_training, vocab_size, batch_size, num_steps):
+        super(SmallZarembaModel2, self).__init__()
+        self.hidden_size = 200
+        self.input_size = 200
+        self.num_layers = 2
+
+        dims = [batch_size, num_steps]
+        self._input_data = tf.placeholder(
+            tf.int32, dims, name='input_placeholder')
+        self._targets = tf.placeholder(
+            tf.int32, dims, name='target_placeholder')
+
+        self.rnn = rnn.MultiRNNCell(
+            [rnn.BasicLSTMCell(self.hidden_size, forget_bias=1.0, state_is_tuple=True)
+             for _ in range(self.num_layers)]
+        )
+        self._initial_state = self.rnn.zero_state(batch_size, dtype=tf.float32)
+
+        with tf.device("/cpu:0"):
+            embedding = tf.get_variable(
+                'embedding', [vocab_size, self.hidden_size],
+                trainable=True, dtype=tf.float32)
+            inputs = tf.nn.embedding_lookup(embedding, self._input_data)
+
+        outputs, state = tf.nn.dynamic_rnn(
+            inputs=inputs, cell=self.rnn, dtype=tf.float32,
+            initial_state=self._initial_state)
+        self._final_state = state
+
+        softmax_w = tf.get_variable(
+            "softmax_w", [self.hidden_size, vocab_size], dtype=tf.float32)
+        softmax_b = tf.get_variable(
+            "softmax_b", [vocab_size], dtype=tf.float32)
+        logits = tf.einsum('ijk,kl->ijl', outputs, softmax_w) + softmax_b
+
+        cost = tf.contrib.seq2seq.sequence_loss(
+            logits,
+            self._targets,
+            tf.ones([batch_size, num_steps], dtype=tf.float32),
+            average_across_timesteps=False,  # BPTT
+            average_across_batch=True)
+        self._cost = tf.reduce_sum(cost)
+        self._prediction = tf.reshape(
+            tf.nn.softmax(logits), [-1, num_steps, vocab_size])
+
+        clip = 5
+        if is_training:
+            self._lr = tf.Variable(0.0, trainable=False)
+            self.tvars = tf.trainable_variables()
+            self.grads = tf.gradients(self.cost, self.tvars)
+            if clip:
+                self.clipped_grads, _ = tf.clip_by_global_norm(self.grads, clip)
+            optimizer = tf.train.GradientDescentOptimizer(self._lr)
+            self._train_op = optimizer.apply_gradients(zip(self.clipped_grads, self.tvars))
+
+            self._new_lr = tf.placeholder(
+                tf.float32, shape=[], name="new_learning_rate")
+            self._lr_update = tf.assign(self._lr, self._new_lr)
+        else:
+            self._train_op = tf.no_op()
+
+    def assign_lr(self, session, lr_value):
+        session.run(self._lr_update, feed_dict={self._new_lr: lr_value})
+
+    @property
+    def input_data(self):
+        return self._input_data
+
+    @property
+    def targets(self):
+        return self._targets
+
+    @property
+    def predictions(self):
+        return self._prediction
+
+    @property
+    def initial_state(self):
+        return self._initial_state
+
+    @property
+    def cost(self):
+        return self._cost
+
+    @property
+    def final_state(self):
+        return self._final_state
+
+    @property
+    def lr(self):
+        return self._lr
+
+    @property
+    def train_op(self):
+        return self._train_op
+
+    def init_weights(self):
+        initrange = 0.1
+        self.encoder.weight.data.uniform_(-initrange, initrange)
+        self.decoder.bias.data.uniform_(-initrange, initrange)  # fill_(0)
+        self.decoder.weight.data.uniform_(-initrange, initrange)
+
+    def forward(self, input, hidden):
+        # print('INPUT', input.size())
+        emb = self.encoder(input)
+        # print('EMB', emb.size())
+        # self.rnn.flatten_parameters()
+        output, hidden = self.rnn(emb, hidden)
+        decoded = self.decoder(
+            output.view(output.size(0) * output.size(1), output.size(2)))
+        return decoded.view(output.size(0), output.size(1), decoded.size(1)), hidden
+
+    def init_hidden(self, batch_size):
+        return self.rnn.init_hidden(batch_size)
 
 
 def batchify(data, bsz):
