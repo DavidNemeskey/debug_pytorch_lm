@@ -335,8 +335,8 @@ def train(sess, model, corpus, train_data, epoch, lr, batch_size,
             print('LOSS', cost)
 
             for i, tvar in enumerate(model.tvars):
-                print('GRAD', tvar.name, grads)
-                print('GRAD', tvar.name, clipped_grads)
+                print('GRAD', tvar.name, grads[i])
+                print('GRAD CLIP', tvar.name, clipped_grads[i])
                 print('NEW_VALUE', tvar.name, sess.run(tvar))
 
             print('Trace done; exiting...')
