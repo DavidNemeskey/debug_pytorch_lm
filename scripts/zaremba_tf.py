@@ -52,17 +52,17 @@ class SmallZarembaModel(object):
             "softmax_w", [self.hidden_size, vocab_size], dtype=tf.float32)
         self._softmax_b = tf.get_variable(
             "softmax_b", [vocab_size], dtype=tf.float32)
-        logits = tf.einsum('ijk,kl->ijl', self._rnn_out, self._softmax_w) + self._softmax_b
+        self._logits = tf.einsum('ijk,kl->ijl', self._rnn_out, self._softmax_w) + self._softmax_b
 
         cost = tf.contrib.seq2seq.sequence_loss(
-            logits,
+            self._logits,
             self._targets,
             tf.ones([batch_size, num_steps], dtype=tf.float32),
             average_across_timesteps=False,  # BPTT
             average_across_batch=True)
         self._cost = tf.reduce_sum(cost)
         self._prediction = tf.reshape(
-            tf.nn.softmax(logits), [-1, num_steps, vocab_size])
+            tf.nn.softmax(self._logits), [-1, num_steps, vocab_size])
 
         clip = 5
         if is_training:
@@ -324,11 +324,13 @@ def train(sess, model, corpus, train_data, epoch, lr, batch_size,
             model.targets: targets,
             tuple(model.initial_state): tuple(hidden)
         }
-        cost, output, hidden, _, grads, clipped_grads, emb, rnn_out = sess.run(
-            fetches + [model.grads, model.clipped_grads, model._emb, model._rnn_out], feed_dict)
+        cost, output, hidden, _, grads, clipped_grads, emb, rnn_out, logits = sess.run(
+            fetches + [model.grads, model.clipped_grads,
+                       model._emb, model._rnn_out, model._logits], feed_dict)
         if trace:
             print('EMB', emb)
             print('RNN_OUT', rnn_out)
+            print('LOGITS', logits.shape, logits)
             print('OUTPUT', output.shape, output)
             print('FINAL_STATE', hidden)
             print('LOSS', cost)

@@ -54,6 +54,7 @@ class SmallZarembaModel(nn.Module):
         if trace:
             print('EMB', emb.data.cpu().numpy())
             print('RNN_OUT', output.data.cpu().numpy())
+            print('DECODED', decoded.size(), decoded.data.cpu().numpy())
         return decoded.view(output.size(0), output.size(1), decoded.size(1)), hidden
 
     def init_hidden(self, batch_size):
