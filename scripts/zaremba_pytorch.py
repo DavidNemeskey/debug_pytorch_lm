@@ -194,7 +194,7 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
         model.zero_grad()
         output, hidden = model(data, hidden)
         if trace:
-            print('OUTPUT', output.data.cpu().numpy())
+            print('OUTPUT', output.data.size(), output.data.cpu().numpy())
             print('FINAL STATE', [[v.data.cpu().numpy() for v in t] for t in hidden])
         # print('TARGETS\n', np.vectorize(to_str)(targets.data.cpu().numpy()))
         # _, indices = output.max(2)
@@ -286,8 +286,8 @@ def main():
 
     corpus = Corpus(args.data)
 
-    train_batch_size = 20
-    eval_batch_size = 20
+    train_batch_size = 25
+    eval_batch_size = 25
     num_steps = 20
     train_data = batchify(corpus.train, train_batch_size, args.cuda)
     val_data = batchify(corpus.valid, eval_batch_size, args.cuda)

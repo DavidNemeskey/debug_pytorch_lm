@@ -327,7 +327,7 @@ def train(sess, model, corpus, train_data, epoch, lr, batch_size,
         cost, output, hidden, _, grads, clipped_grads = sess.run(
             fetches + [model.grads, model.clipped_grads], feed_dict)
         if trace:
-            print('OUTPUT', output)
+            print('OUTPUT', output.shape, output)
             print('FINAL_STATE', hidden)
             print('LOSS', cost)
 
@@ -381,8 +381,8 @@ def main():
 
     corpus = Corpus(args.data)
 
-    train_batch_size = 20
-    eval_batch_size = 20
+    train_batch_size = 25
+    eval_batch_size = 25
     num_steps = 20
     train_data = batchify(corpus.train, train_batch_size)
     val_data = batchify(corpus.valid, eval_batch_size)
