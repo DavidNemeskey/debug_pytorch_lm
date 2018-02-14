@@ -257,6 +257,9 @@ def parse_arguments():
     parser.add_argument('--seed', '-s', type=int, default=1111, help='random seed')
     parser.add_argument('--log-interval', '-l', type=int, default=200, metavar='N',
                         help='report interval')
+    parser.add_argument('--trace-data', '-T', action='store_true',
+                        help='log the weights and results of each component. '
+                             'Exits after the first iteration.')
     save_load = parser.add_mutually_exclusive_group()
     save_load.add_argument('--save-params', '-S',
                            help='save parameters to an .npz file and exit.')
@@ -288,18 +291,23 @@ def get_batch(source, i, num_steps, evaluation=False):
 
 
 def train(sess, model, corpus, train_data, epoch, lr, batch_size,
-          num_steps, log_interval):
+          num_steps, log_interval, trace=False):
     # Turn on training mode which enables dropout.
     model.assign_lr(sess, lr)
     total_loss = 0
     start_time = time.time()
     fetches = [model.cost, model.predictions, model.final_state, model.train_op]
-    hidden = sess.run(model.initial_state)
-
     data_len = train_data.shape[1]
+    hidden = sess.run(model.initial_state)
+    if trace:
+        print('HIDDEN', hidden)
+
     for batch, i in enumerate(range(0, data_len - 1, num_steps)):
         # print('FOR', batch, i, (train_data.size(1) - 1) // num_steps)
         data, targets = get_batch(train_data, i, num_steps)
+        if trace:
+            print('DATA', data)
+            print('TARGET', targets)
 
         def to_str(f):
             return corpus.dictionary.idx2word[f]

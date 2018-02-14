@@ -95,6 +95,9 @@ def parse_arguments():
     parser.add_argument('--cuda', '-c', action='store_true', help='use CUDA')
     parser.add_argument('--log-interval', '-l', type=int, default=200, metavar='N',
                         help='report interval')
+    parser.add_argument('--trace-data', '-T', action='store_true',
+                        help='log the weights and results of each component. '
+                             'Exits after the first iteration.')
     save_load = parser.add_mutually_exclusive_group()
     save_load.add_argument('--save-params', '-S',
                            help='save parameters to an .npz file and exit.')
@@ -159,17 +162,23 @@ def get_batch(source, i, num_steps, evaluation=False):
 
 
 def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
-          num_steps, log_interval):
+          num_steps, log_interval, trace=False):
     # Turn on training mode which enables dropout.
     model.train()
     total_loss = 0
     start_time = time.time()
     vocab_size = len(corpus.dictionary)
-    len_data = train_data.size(1)
+    data_len = train_data.size(1)
     hidden = model.init_hidden(batch_size)
-    for batch, i in enumerate(range(0, len_data - 1, num_steps)):
+    if trace:
+        print('HIDDEN', hidden.cpu().numpy())
+
+    for batch, i in enumerate(range(0, data_len - 1, num_steps)):
         # print('FOR', batch, i, (train_data.size(1) - 1) // num_steps)
         data, targets = get_batch(train_data, i, num_steps)
+        if trace:
+            print('DATA', data.cpu().numpy())
+            print('TARGET', targets.cpu().numpy())
 
         def to_str(f):
             return corpus.dictionary.idx2word[f]
@@ -184,17 +193,22 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
         hidden = repackage_hidden(hidden)
         model.zero_grad()
         output, hidden = model(data, hidden)
+        if trace:
+            print('OUTPUT', output.cpu().numpy())
+            print('FINAL STATE', hidden.cpu().numpy())
         # print('TARGETS\n', np.vectorize(to_str)(targets.data.cpu().numpy()))
         # _, indices = output.max(2)
         # print('OUTPUT\n', np.vectorize(to_str)(indices.data.cpu().numpy()))
         loss = criterion(output.view(-1, vocab_size), targets.view(-1))
+        if trace:
+            print('LOSS', loss)
         loss.backward()
 
         # `clip_grad_norm` helps prevent the exploding gradient problem in RNNs / LSTMs.
         # torch.nn.utils.clip_grad_norm(model.parameters(), config.clip)
         # all_min, all_max, all_sum, all_size = 1000, -1000, 0, 0
         for name, p in model.named_parameters():
-            data = p.grad.data
+            # data = p.grad.data
             # shape = data.size()
             # all_min = all_min if data.min() >= all_min else data.min()
             # all_max = all_max if data.max() <= all_max else data.max()
@@ -202,12 +216,19 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
             # from functools import reduce
             # all_size += reduce(lambda a, b: a * b, shape)
             # print(name, shape, data.min(), data.max(), data.mean(), data.std())
+            print('GRAD', name, p.grad.data.cpu().numpy())
             p.grad.data.clamp_(-5.0, 5.0)
+            print('GRAD CLIP', name, p.grad.data.cpu().numpy())
             p.data.add_(-1 * lr, p.grad.data)
+            print('NEW VALUE', name, p.data.cpu().numpy())
         # print('Sum', all_min, all_max, all_sum / all_size)
         # print()
         # if batch % log_interval == 0 and batch > 0:
         #     sys.exit()
+
+        if trace:
+            print('Trace done; exiting...')
+            sys.exit()
 
         total_loss += loss.data
 
@@ -216,7 +237,7 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
             elapsed = time.time() - start_time
             print('| epoch {:3d} | {:5d}/{:5d} batches | lr {:02.2f} | '
                   'ms/batch {:5.2f} | loss {:5.2f} | ppl {:8.2f}'.format(
-                      epoch, batch, len_data // num_steps, lr,
+                      epoch, batch, data_len // num_steps, lr,
                       elapsed * 1000 / log_interval, cur_loss, math.exp(cur_loss)),
                   flush=True)
             total_loss = 0
