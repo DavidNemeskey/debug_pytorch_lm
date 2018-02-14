@@ -35,6 +35,7 @@ class SmallZarembaModel(nn.Module):
         self.encoder = nn.Embedding(vocab_size, self.hidden_size)
         self.rnn = Lstm(self.input_size, self.hidden_size, self.num_layers)
         self.decoder = nn.Linear(self.hidden_size, vocab_size)
+        self.init_weights()
 
     def init_weights(self):
         initrange = 0.1
