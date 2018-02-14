@@ -43,7 +43,7 @@ class SmallZarembaModel(nn.Module):
         self.decoder.bias.data.uniform_(-initrange, initrange)  # fill_(0)
         self.decoder.weight.data.uniform_(-initrange, initrange)
 
-    def forward(self, input, hidden):
+    def forward(self, input, hidden, trace=False):
         # print('INPUT', input.size())
         emb = self.encoder(input)
         # print('EMB', emb.size())
@@ -51,6 +51,9 @@ class SmallZarembaModel(nn.Module):
         output, hidden = self.rnn(emb, hidden)
         decoded = self.decoder(
             output.view(output.size(0) * output.size(1), output.size(2)))
+        if trace:
+            print('EMB', emb.data.cpu().numpy())
+            print('RNN_OUT', output.data.cpu().numpy())
         return decoded.view(output.size(0), output.size(1), decoded.size(1)), hidden
 
     def init_hidden(self, batch_size):
