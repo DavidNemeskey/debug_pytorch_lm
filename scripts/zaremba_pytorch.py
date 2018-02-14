@@ -171,7 +171,7 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
     data_len = train_data.size(1)
     hidden = model.init_hidden(batch_size)
     if trace:
-        print('HIDDEN', hidden.cpu().numpy())
+        print('HIDDEN', [[v.data.cpu().numpy() for v in t] for t in hidden])
 
     for batch, i in enumerate(range(0, data_len - 1, num_steps)):
         # print('FOR', batch, i, (train_data.size(1) - 1) // num_steps)
@@ -194,8 +194,8 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
         model.zero_grad()
         output, hidden = model(data, hidden)
         if trace:
-            print('OUTPUT', output.cpu().numpy())
-            print('FINAL STATE', hidden.cpu().numpy())
+            print('OUTPUT', output.data.cpu().numpy())
+            print('FINAL STATE', [[v.data.cpu().numpy() for v in t] for t in hidden])
         # print('TARGETS\n', np.vectorize(to_str)(targets.data.cpu().numpy()))
         # _, indices = output.max(2)
         # print('OUTPUT\n', np.vectorize(to_str)(indices.data.cpu().numpy()))
