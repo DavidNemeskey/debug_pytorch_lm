@@ -327,7 +327,8 @@ def main():
             lr = orig_lr * lr_decay
             epoch_start_time = time.time()
             train(model, corpus, train_data, criterion, epoch,
-                  lr, train_batch_size, num_steps, args.log_interval)
+                  lr, train_batch_size, num_steps, args.log_interval,
+                  args.trace_data)
             val_loss = evaluate(model, corpus, val_data,
                                 criterion, eval_batch_size, num_steps)
             print('-' * 89)
