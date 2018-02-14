@@ -324,7 +324,20 @@ def train(sess, model, corpus, train_data, epoch, lr, batch_size,
             model.targets: targets,
             tuple(model.initial_state): tuple(hidden)
         }
-        cost, output, hidden, _, grads = sess.run(fetches + [model.grads], feed_dict)
+        cost, output, hidden, _, grads, clipped_grads = sess.run(
+            fetches + [model.grads, model.clipped_grads], feed_dict)
+        if trace:
+            print('OUTPUT', output)
+            print('FINAL_STATE', hidden)
+            print('LOSS', cost)
+
+            for i, tvar in enumerate(model.tvars):
+                print('GRAD', tvar.name, grads)
+                print('GRAD', tvar.name, clipped_grads)
+                print('NEW_VALUE', tvar.name, sess.run(tvar))
+
+            print('Trace done; exiting...')
+            sys.exit()
 
         total_loss += cost / num_steps
 
@@ -421,7 +434,8 @@ def main():
                 lr = orig_lr * lr_decay
                 epoch_start_time = time.time()
                 train(sess, mtrain, corpus, train_data, epoch,
-                      lr, train_batch_size, num_steps, args.log_interval)
+                      lr, train_batch_size, num_steps, args.log_interval,
+                      args.trace_data)
                 val_loss = evaluate(sess, mvalid, corpus, val_data,
                                     eval_batch_size, num_steps)
                 print('-' * 89)
