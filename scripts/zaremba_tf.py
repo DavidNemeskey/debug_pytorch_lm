@@ -9,8 +9,10 @@ Zaremba's results (see emLam).
 
 import argparse
 import math
+import sys
 import time
 
+import numpy as np
 import tensorflow as tf
 import tensorflow.contrib.rnn as rnn
 
@@ -32,8 +34,9 @@ class SmallZarembaModel(object):
         self._targets = tf.placeholder(
             tf.int32, dims, name='target_placeholder')
 
-        self.rnn = Lstm(self.input_size, self.hidden_size,
-                        self.num_layers, batch_size)
+        with tf.variable_scope('RNN'):
+            self.rnn = Lstm(self.input_size, self.hidden_size,
+                            self.num_layers, batch_size)
         self._initial_state = self.rnn.init_hidden()
 
         with tf.device("/cpu:0"):
@@ -116,20 +119,27 @@ class SmallZarembaModel(object):
         return self.rnn.init_hidden(batch_size)
 
     def save_parameters(self, session, out_dict=None):
+        def save(param, ddict):
+            ddict[param.name.rsplit(':', 1)[0]] = session.run([param])[0]
+
         if out_dict is None:
             out_dict = {}
+        self.rnn.save_parameters(session, out_dict)
+        save(self._embedding, out_dict)
+        save(self._softmax_w, out_dict)
+        save(self._softmax_b, out_dict)
+        return out_dict
 
     def load_parameters(self, session, data_dict):
         """Loads the parameters saved by save_parameters()."""
+        def load(param):
+            name = param.name.rsplit(':', 1)[0]
+            session.run(param.assign(data_dict[name]))
+
         self.rnn.load_parameters(session, data_dict)
-        # Note: this is not correct, but I couldn't care less
-        for name, value in data_dict.values():
-            if 'embedding' in name:
-                session.run(self._embedding.assign(value))
-            if 'softmax_w' in name:
-                session.run(self._softmax_w.assign(value))
-            if 'softmax_b' in name:
-                session.run(self._softmax_b.assign(value))
+        load(self._embedding)
+        load(self._softmax_w)
+        load(self._softmax_b)
 
 
 class SmallZarembaModel2(object):
@@ -247,6 +257,11 @@ def parse_arguments():
     parser.add_argument('--seed', '-s', type=int, default=1111, help='random seed')
     parser.add_argument('--log-interval', '-l', type=int, default=200, metavar='N',
                         help='report interval')
+    save_load = parser.add_mutually_exclusive_group()
+    save_load.add_argument('--save-params', '-S',
+                           help='save parameters to an .npz file and exit.')
+    save_load.add_argument('--load-params', '-L',
+                           help='load parameters from an .npz file.')
     return parser.parse_args()
 
 
@@ -383,6 +398,13 @@ def main():
 
     with tf.Session(graph=graph) as sess:
         sess.run(init)
+        if args.save_params:
+            np.savez(args.save_params, **mtrain.save_parameters(sess))
+            print('Saved parameters to', args.save_params)
+            sys.exit()
+        if args.load_params:
+            mtrain.load_parameters(sess, dict(np.load(args.load_params)))
+            print('Loaded parameters from', args.load_params)
 
         # At any point you can hit Ctrl + C to break out of training early.
         try:

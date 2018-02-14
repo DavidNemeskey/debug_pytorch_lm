@@ -12,8 +12,10 @@ Pytorch as well. Hence this repository; to find out what's wrong with Pytorch.
 
 import argparse
 import math
+import sys
 import time
 
+import numpy as np
 import torch
 import torch.nn as nn
 from torch.autograd import Variable
@@ -58,22 +60,24 @@ class SmallZarembaModel(nn.Module):
             out_dict = {}
         self.rnn.save_parameters(out_dict, prefix=prefix + 'RNN/')
         out_dict[prefix + 'embedding'] = self.encoder.weight.data.cpu().numpy()
-        out_dict[prefix + 'softmax_w'] = self.decoder.weight.data.cpu().numpy()
+        # .T is required because stupid Linear stores the weights transposed
+        out_dict[prefix + 'softmax_w'] = self.decoder.weight.data.cpu().numpy().T
         out_dict[prefix + 'softmax_b'] = self.decoder.bias.data.cpu().numpy()
         return out_dict
 
     def load_parameters(self, data_dict, prefix=''):
         def set_data(parameter, value, is_cuda):
-            t = torch.from_numpy(data_dict[prefix + 'Embedding'])
+            t = torch.from_numpy(value)
             if is_cuda:
                 t = t.cuda()
             parameter.data = t
 
         is_cuda = self.encoder.weight.is_cuda
         self.rnn.load_parameters(data_dict, prefix=prefix + 'RNN/')
-        set_data(self.encoder.weight, data_dict[prefix + 'Embedding'], is_cuda)
-        set_data(self.decoder.weight, data_dict[prefix + 'softmax_w'], is_cuda)
-        set_data(self.encoder.bias, data_dict[prefix + 'softmax_b'], is_cuda)
+        set_data(self.encoder.weight, data_dict[prefix + 'embedding'], is_cuda)
+        # .T is required because stupid Linear stores the weights transposed
+        set_data(self.decoder.weight, data_dict[prefix + 'softmax_w'].T, is_cuda)
+        set_data(self.decoder.bias, data_dict[prefix + 'softmax_b'], is_cuda)
 
 
 def parse_arguments():
@@ -90,6 +94,11 @@ def parse_arguments():
     parser.add_argument('--cuda', '-c', action='store_true', help='use CUDA')
     parser.add_argument('--log-interval', '-l', type=int, default=200, metavar='N',
                         help='report interval')
+    save_load = parser.add_mutually_exclusive_group()
+    save_load.add_argument('--save-params', '-S',
+                           help='save parameters to an .npz file and exit.')
+    save_load.add_argument('--load-params', '-L',
+                           help='load parameters from an .npz file.')
     return parser.parse_args()
 
 
@@ -268,6 +277,14 @@ def main():
 
     vocab_size = len(corpus.dictionary)
     model = SmallZarembaModel(vocab_size)
+    if args.save_params:
+        np.savez(args.save_params, **model.save_parameters(prefix='Model/'))
+        print('Saved parameters to', args.save_params)
+        sys.exit()
+    if args.load_params:
+        model.load_parameters(dict(np.load(args.load_params)), prefix='Model/')
+        print('Loaded parameters from', args.load_params)
+
     if args.cuda:
         model.cuda()
 
