@@ -195,7 +195,7 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
         # If we didn't, the model would try backpropagating all the way to start of the dataset.
         hidden = repackage_hidden(hidden)
         model.zero_grad()
-        output, hidden = model(data, hidden)
+        output, hidden = model(data, hidden, trace)
         if trace:
             print('OUTPUT', output.data.size(), output.data.cpu().numpy())
             print('FINAL STATE', [[v.data.cpu().numpy() for v in t] for t in hidden])
