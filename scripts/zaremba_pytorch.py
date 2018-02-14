@@ -54,7 +54,6 @@ class SmallZarembaModel(nn.Module):
         if trace:
             print('EMB', emb.data.cpu().numpy())
             print('RNN_OUT', output.data.cpu().numpy())
-            print('DECODED', decoded.size(), decoded.data.cpu().numpy())
         return decoded.view(output.size(0), output.size(1), decoded.size(1)), hidden
 
     def init_hidden(self, batch_size):
@@ -198,7 +197,7 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
         model.zero_grad()
         output, hidden = model(data, hidden, trace)
         if trace:
-            print('OUTPUT', output.data.size(), output.data.cpu().numpy())
+            print('LOGITS', output.data.size(), output.data.cpu().numpy())
             print('FINAL STATE', [[v.data.cpu().numpy() for v in t] for t in hidden])
         # print('TARGETS\n', np.vectorize(to_str)(targets.data.cpu().numpy()))
         # _, indices = output.max(2)

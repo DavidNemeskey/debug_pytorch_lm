@@ -324,14 +324,13 @@ def train(sess, model, corpus, train_data, epoch, lr, batch_size,
             model.targets: targets,
             tuple(model.initial_state): tuple(hidden)
         }
-        cost, output, hidden, _, grads, clipped_grads, emb, rnn_out, logits = sess.run(
+        cost, predictions, hidden, _, grads, clipped_grads, emb, rnn_out, logits = sess.run(
             fetches + [model.grads, model.clipped_grads,
                        model._emb, model._rnn_out, model._logits], feed_dict)
         if trace:
             print('EMB', emb)
             print('RNN_OUT', rnn_out)
             print('LOGITS', logits.shape, logits)
-            print('OUTPUT', output.shape, output)
             print('FINAL_STATE', hidden)
             print('LOSS', cost)
 
