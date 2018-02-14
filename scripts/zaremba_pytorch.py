@@ -53,6 +53,28 @@ class SmallZarembaModel(nn.Module):
     def init_hidden(self, batch_size):
         return self.rnn.init_hidden(batch_size)
 
+    def save_parameters(self, out_dict=None, prefix=''):
+        if out_dict is None:
+            out_dict = {}
+        self.rnn.save_parameters(out_dict, prefix=prefix + 'RNN/')
+        out_dict[prefix + 'embedding'] = self.encoder.weight.data.cpu().numpy()
+        out_dict[prefix + 'softmax_w'] = self.decoder.weight.data.cpu().numpy()
+        out_dict[prefix + 'softmax_b'] = self.decoder.bias.data.cpu().numpy()
+        return out_dict
+
+    def load_parameters(self, data_dict, prefix=''):
+        def set_data(parameter, value, is_cuda):
+            t = torch.from_numpy(data_dict[prefix + 'Embedding'])
+            if is_cuda:
+                t = t.cuda()
+            parameter.data = t
+
+        is_cuda = self.encoder.weight.is_cuda
+        self.rnn.load_parameters(data_dict, prefix=prefix + 'RNN/')
+        set_data(self.encoder.weight, data_dict[prefix + 'Embedding'], is_cuda)
+        set_data(self.decoder.weight, data_dict[prefix + 'softmax_w'], is_cuda)
+        set_data(self.encoder.bias, data_dict[prefix + 'softmax_b'], is_cuda)
+
 
 def parse_arguments():
     parser = argparse.ArgumentParser(

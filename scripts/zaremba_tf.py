@@ -37,19 +37,19 @@ class SmallZarembaModel(object):
         self._initial_state = self.rnn.init_hidden()
 
         with tf.device("/cpu:0"):
-            embedding = tf.get_variable(
+            self._embedding = tf.get_variable(
                 'embedding', [vocab_size, self.hidden_size],
                 trainable=True, dtype=tf.float32)
-            inputs = tf.nn.embedding_lookup(embedding, self._input_data)
+            inputs = tf.nn.embedding_lookup(self._embedding, self._input_data)
 
         outputs, state = self.rnn(inputs, self._initial_state)
         self._final_state = state
 
-        softmax_w = tf.get_variable(
+        self._softmax_w = tf.get_variable(
             "softmax_w", [self.hidden_size, vocab_size], dtype=tf.float32)
-        softmax_b = tf.get_variable(
+        self._softmax_b = tf.get_variable(
             "softmax_b", [vocab_size], dtype=tf.float32)
-        logits = tf.einsum('ijk,kl->ijl', outputs, softmax_w) + softmax_b
+        logits = tf.einsum('ijk,kl->ijl', outputs, self._softmax_w) + self._softmax_b
 
         cost = tf.contrib.seq2seq.sequence_loss(
             logits,
@@ -112,40 +112,24 @@ class SmallZarembaModel(object):
     def train_op(self):
         return self._train_op
 
-    def init_weights(self):
-        initrange = 0.1
-        self.encoder.weight.data.uniform_(-initrange, initrange)
-        self.decoder.bias.data.uniform_(-initrange, initrange)  # fill_(0)
-        self.decoder.weight.data.uniform_(-initrange, initrange)
-
-    def forward(self, input, hidden):
-        # print('INPUT', input.size())
-        emb = self.encoder(input)
-        # print('EMB', emb.size())
-        # self.rnn.flatten_parameters()
-        output, hidden = self.rnn(emb, hidden)
-        decoded = self.decoder(
-            output.view(output.size(0) * output.size(1), output.size(2)))
-        return decoded.view(output.size(0), output.size(1), decoded.size(1)), hidden
-
     def init_hidden(self, batch_size):
         return self.rnn.init_hidden(batch_size)
 
+    def save_parameters(self, session, out_dict=None):
+        if out_dict is None:
+            out_dict = {}
 
-def parse_arguments():
-    parser = argparse.ArgumentParser(
-        description='Modification of the PyTorch Wikitext-2 RNN/LSTM Language '
-                    'Model, so that it actually does what Zaremba (2014) '
-                    'described, in TensorFlow.')
-    parser.add_argument('--data', '-d', type=str, default='./data/wikitext-2',
-                        help='location of the data corpus (files called '
-                             'train|valid|test.txt).')
-    parser.add_argument('--model', '-m', type=str, default='LSTM',
-                        help='the model key name.')
-    parser.add_argument('--seed', '-s', type=int, default=1111, help='random seed')
-    parser.add_argument('--log-interval', '-l', type=int, default=200, metavar='N',
-                        help='report interval')
-    return parser.parse_args()
+    def load_parameters(self, session, data_dict):
+        """Loads the parameters saved by save_parameters()."""
+        self.rnn.load_parameters(session, data_dict)
+        # Note: this is not correct, but I couldn't care less
+        for name, value in data_dict.values():
+            if 'embedding' in name:
+                session.run(self._embedding.assign(value))
+            if 'softmax_w' in name:
+                session.run(self._softmax_w.assign(value))
+            if 'softmax_b' in name:
+                session.run(self._softmax_b.assign(value))
 
 
 class SmallZarembaModel2(object):
@@ -246,24 +230,24 @@ class SmallZarembaModel2(object):
     def train_op(self):
         return self._train_op
 
-    def init_weights(self):
-        initrange = 0.1
-        self.encoder.weight.data.uniform_(-initrange, initrange)
-        self.decoder.bias.data.uniform_(-initrange, initrange)  # fill_(0)
-        self.decoder.weight.data.uniform_(-initrange, initrange)
-
-    def forward(self, input, hidden):
-        # print('INPUT', input.size())
-        emb = self.encoder(input)
-        # print('EMB', emb.size())
-        # self.rnn.flatten_parameters()
-        output, hidden = self.rnn(emb, hidden)
-        decoded = self.decoder(
-            output.view(output.size(0) * output.size(1), output.size(2)))
-        return decoded.view(output.size(0), output.size(1), decoded.size(1)), hidden
-
     def init_hidden(self, batch_size):
         return self.rnn.init_hidden(batch_size)
+
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(
+        description='Modification of the PyTorch Wikitext-2 RNN/LSTM Language '
+                    'Model, so that it actually does what Zaremba (2014) '
+                    'described, in TensorFlow.')
+    parser.add_argument('--data', '-d', type=str, default='./data/wikitext-2',
+                        help='location of the data corpus (files called '
+                             'train|valid|test.txt).')
+    parser.add_argument('--model', '-m', type=str, default='LSTM',
+                        help='the model key name.')
+    parser.add_argument('--seed', '-s', type=int, default=1111, help='random seed')
+    parser.add_argument('--log-interval', '-l', type=int, default=200, metavar='N',
+                        help='report interval')
+    return parser.parse_args()
 
 
 def batchify(data, bsz):
