@@ -4,10 +4,11 @@
 """Implements loss functions not in torch.nn."""
 
 import torch
-import torch.nn.modules.functional as F
+import torch.nn.functional as F
+import torch.nn.modules.loss as L
 
 
-class SequenceLoss(torch.nn.modules.loss._WeightedLoss):
+class SequenceLoss(L._WeightedLoss):
     """
     Implements TensorFlow's sequence_loss. It is basically the same as
     `CrossEntropyLoss`, but expects a three-dimensional input and (by default)
@@ -64,7 +65,7 @@ class SequenceLoss(torch.nn.modules.loss._WeightedLoss):
             raise ValueError('Invalid aggregation "{}"'.format(func_str))
 
     def forward(self, input, target):
-        torch.nn.modules.loss._assert_no_grad(target)
+        L._assert_no_grad(target)
         flat_input = input.view(-1, input.size(2))
         flat_targets = target.view(-1)
         flat_losses = F.cross_entropy(flat_input, flat_targets, self.weight,
