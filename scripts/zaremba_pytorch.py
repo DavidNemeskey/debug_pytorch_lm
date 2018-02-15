@@ -220,11 +220,14 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
             # from functools import reduce
             # all_size += reduce(lambda a, b: a * b, shape)
             # print(name, shape, data.min(), data.max(), data.mean(), data.std())
-            print('GRAD', name, p.grad.data.cpu().numpy())
+            if trace:
+                print('GRAD', name, p.grad.data.cpu().numpy())
             p.grad.data.clamp_(-5.0, 5.0)
-            print('GRAD CLIP', name, p.grad.data.cpu().numpy())
+            if trace:
+                print('GRAD CLIP', name, p.grad.data.cpu().numpy())
             p.data.add_(-1 * lr, p.grad.data)
-            print('NEW VALUE', name, p.data.cpu().numpy())
+            if trace:
+                print('NEW VALUE', name, p.data.cpu().numpy())
         # print('Sum', all_min, all_max, all_sum / all_size)
         # print()
         # if batch % log_interval == 0 and batch > 0:
