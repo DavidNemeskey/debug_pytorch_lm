@@ -22,6 +22,7 @@ from torch.autograd import Variable
 
 from pytorch_lm.data import Corpus
 from pytorch_lm.lstm_pytorch import Lstm
+from pytorch_lm.loss import SequenceLoss
 
 
 class SmallZarembaModel(nn.Module):
@@ -317,7 +318,9 @@ def main():
     # Training code
     ###############################################################################
 
-    criterion = nn.CrossEntropyLoss()
+    # criterion = nn.CrossEntropyLoss()
+    criterion = SequenceLoss(reduce_across_batch='mean',
+                             reduce_across_timesteps='sum')
 
     # Loop over epochs.
     orig_lr = 1.0
