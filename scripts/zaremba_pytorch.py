@@ -203,7 +203,7 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
         # print('TARGETS\n', np.vectorize(to_str)(targets.data.cpu().numpy()))
         # _, indices = output.max(2)
         # print('OUTPUT\n', np.vectorize(to_str)(indices.data.cpu().numpy()))
-        loss = criterion(output.view(-1, vocab_size), targets.view(-1))
+        loss = criterion(output, targets)
         if trace:
             print('LOSS', loss)
         loss.backward()
@@ -258,9 +258,7 @@ def evaluate(model, corpus, data_source, criterion, batch_size, num_steps):
     for i in range(0, data_len - 1, num_steps):
         data, targets = get_batch(data_source, i, num_steps, evaluation=True)
         output, hidden = model(data, hidden)
-        output_flat = output.view(-1, vocab_size)
-        targets_flat = targets.view(-1)
-        total_loss += len(data) * criterion(output_flat, targets_flat).data
+        total_loss += len(data) * criterion(output, targets).data
         hidden = repackage_hidden(hidden)
     return total_loss[0] / data_len
 
