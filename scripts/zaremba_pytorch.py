@@ -99,14 +99,15 @@ def parse_arguments():
     parser.add_argument('--cuda', '-c', action='store_true', help='use CUDA')
     parser.add_argument('--log-interval', '-l', type=int, default=200, metavar='N',
                         help='report interval')
-    parser.add_argument('--trace-data', '-T', action='store_true',
+    parser.add_argument('--trace-data', '-T', type=int, default=0,
                         help='log the weights and results of each component. '
-                             'Exits after the first iteration.')
+                             'Exits after the specified number of minibatches.')
     save_load = parser.add_mutually_exclusive_group()
     save_load.add_argument('--save-params', '-S',
                            help='save parameters to an .npz file and exit.')
     save_load.add_argument('--load-params', '-L',
                            help='load parameters from an .npz file.')
+    parser.add_argument('--lr', type=float, default=1.0)
     return parser.parse_args()
 
 
@@ -166,7 +167,7 @@ def get_batch(source, i, num_steps, evaluation=False):
 
 
 def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
-          num_steps, log_interval, trace=False):
+          num_steps, log_interval, trace=0):
     # Turn on training mode which enables dropout.
     model.train()
     total_loss = 0
@@ -181,6 +182,7 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
         # print('FOR', batch, i, (train_data.size(1) - 1) // num_steps)
         data, targets = get_batch(train_data, i, num_steps)
         if trace:
+            print('BATCH', batch)
             print('DATA', data.cpu().numpy())
             print('TARGET', targets.cpu().numpy())
 
@@ -204,6 +206,7 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
         # _, indices = output.max(2)
         # print('OUTPUT\n', np.vectorize(to_str)(indices.data.cpu().numpy()))
         loss = criterion(output, targets)
+        # print('TRAIN COST', loss)
         if trace:
             print('LOSS', loss)
         loss.backward()
@@ -233,11 +236,11 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
         # if batch % log_interval == 0 and batch > 0:
         #     sys.exit()
 
-        if trace:
+        if trace and batch == trace:
             print('Trace done; exiting...')
             sys.exit()
 
-        total_loss += loss.data
+        total_loss += loss.data / num_steps
 
         if batch % log_interval == 0 and batch > 0:
             cur_loss = total_loss[0] / log_interval
@@ -261,9 +264,13 @@ def evaluate(model, corpus, data_source, criterion, batch_size, num_steps):
     for i in range(0, data_len - 1, num_steps):
         data, targets = get_batch(data_source, i, num_steps, evaluation=True)
         output, hidden = model(data, hidden)
-        total_loss += len(data) * criterion(output, targets).data
+        cost = criterion(output, targets).data
+        # print('EVAL COST', cost)
+        total_loss += cost / num_steps
         hidden = repackage_hidden(hidden)
-    return total_loss[0] / data_len
+    # print('TOTAL LOSS', total_loss)
+    # print('RET LOSS', total_loss[0] / data_len)
+    return total_loss[0]
 
 
 def repackage_hidden(h):
@@ -291,8 +298,8 @@ def main():
 
     corpus = Corpus(args.data)
 
-    train_batch_size = 25
-    eval_batch_size = 25
+    train_batch_size = 20
+    eval_batch_size = 20
     num_steps = 20
     train_data = batchify(corpus.train, train_batch_size, args.cuda)
     val_data = batchify(corpus.valid, eval_batch_size, args.cuda)
@@ -324,7 +331,7 @@ def main():
                              reduce_across_timesteps='sum')
 
     # Loop over epochs.
-    orig_lr = 1.0
+    orig_lr = args.lr
     # best_val_loss = None
 
     # At any point you can hit Ctrl + C to break out of training early.

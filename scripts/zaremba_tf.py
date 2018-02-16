@@ -257,9 +257,9 @@ def parse_arguments():
     parser.add_argument('--seed', '-s', type=int, default=1111, help='random seed')
     parser.add_argument('--log-interval', '-l', type=int, default=200, metavar='N',
                         help='report interval')
-    parser.add_argument('--trace-data', '-T', action='store_true',
+    parser.add_argument('--trace-data', '-T', type=int, default=0,
                         help='log the weights and results of each component. '
-                             'Exits after the first iteration.')
+                             'Exits after the specified number of minibatches.')
     save_load = parser.add_mutually_exclusive_group()
     save_load.add_argument('--save-params', '-S',
                            help='save parameters to an .npz file and exit.')
@@ -291,7 +291,7 @@ def get_batch(source, i, num_steps, evaluation=False):
 
 
 def train(sess, model, corpus, train_data, epoch, lr, batch_size,
-          num_steps, log_interval, trace=False):
+          num_steps, log_interval, trace=0):
     # Turn on training mode which enables dropout.
     model.assign_lr(sess, lr)
     total_loss = 0
@@ -306,6 +306,7 @@ def train(sess, model, corpus, train_data, epoch, lr, batch_size,
         # print('FOR', batch, i, (train_data.size(1) - 1) // num_steps)
         data, targets = get_batch(train_data, i, num_steps)
         if trace:
+            print('BATCH', batch)
             print('DATA', data)
             print('TARGET', targets)
 
@@ -327,6 +328,7 @@ def train(sess, model, corpus, train_data, epoch, lr, batch_size,
         cost, predictions, hidden, _, grads, clipped_grads, emb, rnn_out, logits = sess.run(
             fetches + [model.grads, model.clipped_grads,
                        model._emb, model._rnn_out, model._logits], feed_dict)
+        # print('TRAIN LOSS', cost)
         if trace:
             print('EMB', emb)
             print('RNN_OUT', rnn_out)
@@ -339,8 +341,9 @@ def train(sess, model, corpus, train_data, epoch, lr, batch_size,
                 print('GRAD CLIP', tvar.name, clipped_grads[i])
                 print('NEW_VALUE', tvar.name, sess.run(tvar))
 
-            print('Trace done; exiting...')
-            sys.exit()
+            if batch == trace:
+                print('Trace done; exiting...')
+                sys.exit()
 
         total_loss += cost / num_steps
 
@@ -349,7 +352,7 @@ def train(sess, model, corpus, train_data, epoch, lr, batch_size,
             elapsed = time.time() - start_time
             print('| epoch {:3d} | {:5d}/{:5d} batches | lr {:02.2f} | '
                   'ms/batch {:5.2f} | loss {:5.2f} | ppl {:8.2f}'.format(
-                      epoch, batch, len(train_data) // num_steps, lr,
+                      epoch, batch, data_len // num_steps, lr,
                       elapsed * 1000 / log_interval, cur_loss, math.exp(cur_loss)),
                   flush=True)
             total_loss = 0
@@ -370,7 +373,10 @@ def evaluate(sess, model, corpus, data_source, batch_size, num_steps):
             tuple(model.initial_state): tuple(hidden)
         }
         cost, output, hidden = sess.run(fetches, feed_dict)
+        # print('EVAL COST', cost)
         total_loss += cost
+    # print('TOTAL LOSS', total_loss)
+    # print('RET LOSS', total_loss / data_len)
     # print('TOTAL LOSS', total_loss, 'LEN DATA', len(data_source), data_source.size())
     return total_loss / data_len
 
@@ -384,8 +390,8 @@ def main():
 
     corpus = Corpus(args.data)
 
-    train_batch_size = 25
-    eval_batch_size = 25
+    train_batch_size = 20
+    eval_batch_size = 20
     num_steps = 20
     train_data = batchify(corpus.train, train_batch_size)
     val_data = batchify(corpus.valid, eval_batch_size)
