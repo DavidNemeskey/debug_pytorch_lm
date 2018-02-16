@@ -265,6 +265,7 @@ def parse_arguments():
                            help='save parameters to an .npz file and exit.')
     save_load.add_argument('--load-params', '-L',
                            help='load parameters from an .npz file.')
+    parser.add_argument('--lr', type=float, default=1.0)
     return parser.parse_args()
 
 
@@ -357,6 +358,7 @@ def train(sess, model, corpus, train_data, epoch, lr, batch_size,
                   flush=True)
             total_loss = 0
             start_time = time.time()
+            sys.exit()
 
 
 def evaluate(sess, model, corpus, data_source, batch_size, num_steps):
@@ -424,7 +426,7 @@ def main():
     ###############################################################################
 
     # Loop over epochs.
-    orig_lr = 1.0
+    orig_lr = args.lr
 
     with tf.Session(graph=graph) as sess:
         sess.run(init)
