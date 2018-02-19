@@ -252,6 +252,7 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
                   flush=True)
             total_loss = 0
             start_time = time.time()
+            # sys.exit()  # Was here for the LR search
 
 
 def evaluate(model, corpus, data_source, criterion, batch_size, num_steps):
@@ -319,6 +320,7 @@ def main():
         model.load_parameters(dict(np.load(args.load_params)), prefix='Model/')
         print('Loaded parameters from', args.load_params)
 
+    # model.double()
     if args.cuda:
         model.cuda()
 
