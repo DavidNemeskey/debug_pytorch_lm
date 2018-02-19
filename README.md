@@ -10,21 +10,21 @@ Started as a learning project to replicate [Recurrent Neural Network Regularizat
 There are two discrepancies between the implementation in Zaremba (2014) and the official example:
 
 1. The learning rate schedule is different: in the code, it is driven by the validation error, while in the paper, there is a fixed LR decay.
-1. The loss in the example is averaged along both the batch and time dimensions. However, the proper BPTT loss is summed along the time dimension.
+1. The loss in the example is averaged along both the batch and time dimensions. However, the proper BPTT loss is summed along the latter.
 1. The sentences in the data are not shuffled.
 
-The (pytorch) code in this repository is basically the copy of the official example, with the first two items above changed to reflect the implementation in the paper. The last difference is left as-is, because it is easy to account for (it results in better perplexities scores by approximately 5-10 point). Also there are a few other changes:
+The (pytorch) code in this repository is basically the copy of the official example, with the first two items above changed to reflect the implementation in the paper. The last difference is left as-is, because it is easy to account for (it results in better perplexities scores by approximately 5-10 point). There are a few other changes:
 
 1. LSTM has been implemented from scratch (note that its input is batch size x time steps as in TensorFlow);
 1. Only the small model is implemented.
 
-With this, the loss at `LR == 1.0` actually blows up; making it smaller has strange effects, but even with the optimal LR it **does not** arrive at the right numbers.
+With this, the loss at `LR == 1.0` actually blows up. Choosing the optimal learning rate is only possible via a full parameter sweep (see below), but with it the model [**does** arrive at the right numbers](logs/pytorch.log).
 
 ## Comparison with TensorFlow
 
-The repository includes an implementation of the small model in TensorFlow. Similarly to the pytorch version, LSTM has been implemented from scratch, with the same formula as in pytorch. The TF script **does** reproduce the numbers in the paper (or rather it would, if the sentences were be shuffled).
+The repository includes an implementation of the small model in TensorFlow. Similarly to the pytorch version, LSTM has been implemented from scratch, with the same formula as in pytorch. The TF script [reproduce the numbers in the paper **with a wide range of learning rates**](logs/tf.log) (or rather it would, if the sentences were shuffled).
 
-The package also includes tests to prove that the two implementations (TF vs PT) are equivalent. Also, the two Zaremba scripts allow the saving / loading of parameters, so it is possible to test the two implementations with exactly the same weights.
+The package also includes tests to prove that the two implementations (TF vs PT) are equivalent. Also, the two Zaremba scripts allow the saving / loading of parameters, so it is possible to test the two implementations with exactly the same initial weights.
 
 ## Numerical instability
 
@@ -72,9 +72,9 @@ The following graphs show the perplexity against the LR.
 |-----------------------|
 | <img src="logs/pt_loss_at_lr_64.png" alt="Pytorch PPL vs LR, 64 bit" width="640"> |
 
-As can be seen, while the TF graph is nice and smooth(ish), with no extreme values, both PT graphs are all over the place. (Perplexity is cut at 3000 -- the maximum value is in the order of `e+280`.) It seems as if PT is not simply more sensitive to the learning rate, but its effect on the result is completely chaotic. It seems that the underlying implementation in Pytorch is **numerically unstable**.
+As can be seen, while the TF graph is nice and smooth(ish), with no extreme values and only two spikes, both PT graphs are all over the place. (Perplexity is cut at 3000 -- the maximum value is in the order of `e+280`.) It seems as if PT is not just more sensitive to the learning rate, but its effect on the result is completely chaotic. It seems that the underlying implementation in Pytorch is **numerically unstable**.
 
-(Note that this instability persists if I cut out my `SequenceLoss` and revert to the original loss multiplied by `num_steps`, so the problem is not because of that.)
+(Note that this instability persists if I replace my `SequenceLoss` with the original loss function multiplied by `num_steps`, so the problem is not because of that.)
 
 ### How to reproduce
 
