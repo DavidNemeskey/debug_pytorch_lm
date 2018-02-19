@@ -22,7 +22,7 @@ With this, the loss at `LR == 1.0` actually blows up. Choosing the optimal learn
 
 ## Comparison with TensorFlow
 
-The repository includes an implementation of the small model in TensorFlow. Similarly to the pytorch version, LSTM has been implemented from scratch, with the same formula as in pytorch. The TF script [reproduce the numbers in the paper **with a wide range of learning rates**](logs/tf.log) (or rather it would, if the sentences were shuffled).
+The repository includes an implementation of the small model in TensorFlow. Similarly to the pytorch version, LSTM has been implemented from scratch, with the same formula as in pytorch. The TF script [reproduce the numbers in the paper](logs/tf.log) **with a wide range of learning rates**] (or rather it would, if the sentences were shuffled).
 
 The package also includes tests to prove that the two implementations (TF vs PT) are equivalent. Also, the two Zaremba scripts allow the saving / loading of parameters, so it is possible to test the two implementations with exactly the same initial weights.
 
