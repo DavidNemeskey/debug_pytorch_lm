@@ -94,10 +94,7 @@ class LstmCell(nn.Module):
         elif np_arrays is not None:
             ret = (Variable(torch.from_numpy(np_arrays[0]).type(self.w_i.type())),
                    Variable(torch.from_numpy(np_arrays[1]).type(self.w_i.type())))
-        if next(self.parameters()).is_cuda:
-            return tuple(t.cuda() for t in ret)
-        else:
-            return ret
+        return ret
 
 class Lstm(nn.Module):
     """

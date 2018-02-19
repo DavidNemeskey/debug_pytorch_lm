@@ -96,7 +96,7 @@ Versions of the libraries used:
 
 | Library | Version | Comments |
 |---------|---------|----------|
-| Pytorch | 0.4.0a0+c65bd66 | 0.3 is no better |
+| Pytorch | 0.4.0a0+c65bd66 | Also the latest 0.4.0a0+5eefe87 |
 | Tensorflow | 1.4.1 | In a different environment, because in conda, it brings in a different CuDNN version |
 | CuDNN   | 6021 | According to `torch.backends.cudnn.version()` |
 | CUDA    | 8.0  | |
