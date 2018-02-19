@@ -236,7 +236,7 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
         # if batch % log_interval == 0 and batch > 0:
         #     sys.exit()
 
-        if trace and batch == trace:
+        if trace and batch == trace - 1:  # batch counts from 0
             print('Trace done; exiting...')
             sys.exit()
 

@@ -342,7 +342,7 @@ def train(sess, model, corpus, train_data, epoch, lr, batch_size,
                 print('GRAD CLIP', tvar.name, clipped_grads[i])
                 print('NEW_VALUE', tvar.name, sess.run(tvar))
 
-            if batch == trace:
+            if batch == trace - 1:  # batch counts from 0
                 print('Trace done; exiting...')
                 sys.exit()
 
