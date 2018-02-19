@@ -266,12 +266,9 @@ def evaluate(model, corpus, data_source, criterion, batch_size, num_steps):
         data, targets = get_batch(data_source, i, num_steps, evaluation=True)
         output, hidden = model(data, hidden)
         cost = criterion(output, targets).data
-        # print('EVAL COST', cost)
-        total_loss += cost / num_steps
+        total_loss += cost
         hidden = repackage_hidden(hidden)
-    # print('TOTAL LOSS', total_loss)
-    # print('RET LOSS', total_loss[0] / data_len)
-    return total_loss[0]
+    return total_loss[0] / data_len
 
 
 def repackage_hidden(h):
