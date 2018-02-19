@@ -1,0 +1,398 @@
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.01 | ms/batch 21.65 | loss  7.68 | ppl  2161.08
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.02 | ms/batch 21.58 | loss  7.25 | ppl  1403.39
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.03 | ms/batch 21.66 | loss  7.11 | ppl  1229.53
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.04 | ms/batch 21.62 | loss  7.06 | ppl  1168.29
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.05 | ms/batch 21.61 | loss  7.04 | ppl  1136.02
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.06 | ms/batch 21.61 | loss  7.03 | ppl  1126.55
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.07 | ms/batch 21.62 | loss  7.01 | ppl  1109.06
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.08 | ms/batch 21.68 | loss  7.01 | ppl  1102.65
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.09 | ms/batch 21.70 | loss  7.01 | ppl  1103.60
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.10 | ms/batch 21.66 | loss  7.01 | ppl  1110.68
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.11 | ms/batch 21.65 | loss  7.02 | ppl  1114.45
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.12 | ms/batch 21.64 | loss  7.00 | ppl  1097.23
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.13 | ms/batch 21.67 | loss  7.05 | ppl  1149.05
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.14 | ms/batch 21.62 | loss  7.03 | ppl  1126.40
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.15 | ms/batch 21.68 | loss  7.02 | ppl  1114.31
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.16 | ms/batch 21.66 | loss  7.04 | ppl  1143.91
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.17 | ms/batch 21.67 | loss  7.23 | ppl  1375.86
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.18 | ms/batch 21.68 | loss  7.07 | ppl  1175.77
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.19 | ms/batch 21.70 | loss  6.97 | ppl  1068.73
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.20 | ms/batch 21.67 | loss  7.02 | ppl  1118.08
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.21 | ms/batch 21.70 | loss  7.23 | ppl  1384.94
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.22 | ms/batch 21.68 | loss  7.57 | ppl  1934.91
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.23 | ms/batch 21.65 | loss  7.21 | ppl  1358.82
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.24 | ms/batch 21.70 | loss  7.29 | ppl  1472.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.25 | ms/batch 21.63 | loss  7.04 | ppl  1146.33
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.26 | ms/batch 21.63 | loss  7.12 | ppl  1231.96
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.27 | ms/batch 21.72 | loss  9.16 | ppl  9465.97
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.28 | ms/batch 21.64 | loss  7.16 | ppl  1284.62
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.29 | ms/batch 21.68 | loss  8.70 | ppl  6031.95
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.30 | ms/batch 21.70 | loss 44.62 | ppl 23985928587431542784.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.31 | ms/batch 21.67 | loss  7.32 | ppl  1512.44
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.32 | ms/batch 21.69 | loss 10.42 | ppl 33534.77
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.33 | ms/batch 21.64 | loss  7.32 | ppl  1512.87
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.34 | ms/batch 21.65 | loss  7.50 | ppl  1801.01
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.35 | ms/batch 21.68 | loss 10.84 | ppl 51268.80
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.36 | ms/batch 21.64 | loss  7.21 | ppl  1354.24
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.37 | ms/batch 21.66 | loss  6.94 | ppl  1037.23
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.38 | ms/batch 21.66 | loss 12.33 | ppl 225908.04
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.39 | ms/batch 21.69 | loss  7.10 | ppl  1211.59
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.40 | ms/batch 21.68 | loss  8.49 | ppl  4875.78
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.41 | ms/batch 21.70 | loss 107.43 | ppl 45138928507770337428683621894687548456770207744.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.42 | ms/batch 21.64 | loss  7.77 | ppl  2377.73
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.43 | ms/batch 21.64 | loss  7.31 | ppl  1489.64
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.44 | ms/batch 21.68 | loss  7.35 | ppl  1551.61
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.45 | ms/batch 21.71 | loss  7.08 | ppl  1193.35
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.46 | ms/batch 21.67 | loss  7.86 | ppl  2594.99
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.47 | ms/batch 21.72 | loss  7.68 | ppl  2161.20
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.48 | ms/batch 21.62 | loss  8.43 | ppl  4580.83
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.49 | ms/batch 21.67 | loss  7.34 | ppl  1547.40
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.50 | ms/batch 21.65 | loss  7.04 | ppl  1138.23
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.51 | ms/batch 21.65 | loss 18.43 | ppl 101152752.57
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.52 | ms/batch 21.66 | loss 17.26 | ppl 31324875.86
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.53 | ms/batch 21.66 | loss  9.67 | ppl 15778.82
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.54 | ms/batch 21.66 | loss  8.30 | ppl  4041.78
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.55 | ms/batch 21.71 | loss  8.21 | ppl  3680.63
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.56 | ms/batch 21.76 | loss 11.42 | ppl 90915.37
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.57 | ms/batch 21.72 | loss 13.74 | ppl 926298.13
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.58 | ms/batch 21.76 | loss  7.62 | ppl  2043.35
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.59 | ms/batch 21.69 | loss 13.22 | ppl 550541.28
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.60 | ms/batch 21.72 | loss  7.53 | ppl  1869.36
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.61 | ms/batch 21.78 | loss  9.06 | ppl  8639.46
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.62 | ms/batch 21.73 | loss  9.48 | ppl 13057.79
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.63 | ms/batch 21.74 | loss 39.01 | ppl 87857251135151712.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.64 | ms/batch 21.75 | loss 73.21 | ppl 62200147207887278653371339243520.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.65 | ms/batch 21.73 | loss 24.00 | ppl 26376576184.32
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.66 | ms/batch 21.74 | loss 73.99 | ppl 135518392135870234671485493968896.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.67 | ms/batch 21.74 | loss  8.94 | ppl  7639.43
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.68 | ms/batch 21.79 | loss  7.46 | ppl  1744.19
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.69 | ms/batch 21.71 | loss  7.66 | ppl  2125.88
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.70 | ms/batch 21.77 | loss 86.95 | ppl 57872669626584979215891623237172330496.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.71 | ms/batch 21.73 | loss 104.95 | ppl 3808201930128002624302925421255770982074810368.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.72 | ms/batch 21.77 | loss 108.58 | ppl 143536697920524348015125693925068738960042229760.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.73 | ms/batch 21.77 | loss 110.80 | ppl 1315152522585488338519693905030255232703742869504.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.74 | ms/batch 21.74 | loss 23.21 | ppl 12026852737.13
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.75 | ms/batch 21.75 | loss 18.81 | ppl 147770816.70
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.76 | ms/batch 21.74 | loss 28.85 | ppl 3381038752933.72
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.77 | ms/batch 21.72 | loss 170.02 | ppl 68710942132950682754230020066120189164886171128777201075883280003554607104.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.78 | ms/batch 21.80 | loss 11.61 | ppl 110050.15
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.79 | ms/batch 21.77 | loss  7.16 | ppl  1290.20
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.80 | ms/batch 21.70 | loss  7.19 | ppl  1319.69
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.81 | ms/batch 21.68 | loss  7.18 | ppl  1307.09
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.82 | ms/batch 21.72 | loss  7.37 | ppl  1588.31
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.83 | ms/batch 21.70 | loss  7.30 | ppl  1487.33
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.84 | ms/batch 21.73 | loss 62.14 | ppl 968445436533593723734327296.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.85 | ms/batch 21.79 | loss 39.53 | ppl 146546709022392384.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.86 | ms/batch 21.79 | loss 63.53 | ppl 3912139163760536489014853632.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.87 | ms/batch 21.76 | loss 73.52 | ppl 85231995525659518788520676163584.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.88 | ms/batch 21.69 | loss 126.58 | ppl 9376602385034940398986951682102798739083695992759910400.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.89 | ms/batch 21.74 | loss 181.05 | ppl 4257636989010744171259018279742625573313301218837004060835939393471537204953088.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.90 | ms/batch 21.72 | loss 225.36 | ppl 74517223852947338771849325629407444717170055582456268572062043344961170902056176087291338952802304.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.91 | ms/batch 21.74 | loss 262.42 | ppl 931871847604470957405389788361124749189568795880941775664740385872943423497019305529965446230466597554839969857536.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.92 | ms/batch 21.72 | loss 250.89 | ppl 9158988418197387575794708381447814842319766285972276755214721845313800362234739675181664228248092911125659648.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.93 | ms/batch 21.78 | loss 217.71 | ppl 35452015339289792693501866881565458886307803546157710535347258409060441626995267734092304613376.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.94 | ms/batch 21.76 | loss 193.03 | ppl 677612924763555884934921275627458517160654202171935119073741772750218395639510728704.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.95 | ms/batch 21.77 | loss 197.34 | ppl 50340464642508072633565453830313123593080260888804650182123133806709905883854299725824.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.96 | ms/batch 21.76 | loss 234.59 | ppl 758543397719816794108672812151673966963011444716404056239114809082317549309948553928210968217280053248.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.97 | ms/batch 21.76 | loss 114.08 | ppl 34970313667812498975928224159913212561775994601472.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.98 | ms/batch 21.75 | loss 15.22 | ppl 4073391.78
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.99 | ms/batch 21.76 | loss 49.52 | ppl 3202043561666828828672.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.00 | ms/batch 21.70 | loss 15.90 | ppl 8063121.15
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.01 | ms/batch 21.63 | loss 41.40 | ppl 958157977278530816.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.02 | ms/batch 21.65 | loss 52.64 | ppl 72929079934882316025856.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.03 | ms/batch 21.63 | loss 35.46 | ppl 2523556978932423.50
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.04 | ms/batch 21.67 | loss 229.44 | ppl 4412782668641263860100839563922088490016550030825098323491453500780888966727026543392771296127352832.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.05 | ms/batch 21.70 | loss 28.26 | ppl 1870604421910.75
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.06 | ms/batch 21.69 | loss 49.16 | ppl 2245779980396379766784.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.07 | ms/batch 21.72 | loss 51.80 | ppl 31267470672947100778496.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.08 | ms/batch 21.66 | loss  9.62 | ppl 15118.38
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.09 | ms/batch 21.70 | loss 13.91 | ppl 1099165.99
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.10 | ms/batch 21.67 | loss 23.44 | ppl 15085605318.59
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.11 | ms/batch 21.66 | loss 23.97 | ppl 25777832695.90
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.12 | ms/batch 21.66 | loss 369.28 | ppl 23784838478099531172182245075000693981326477840167714941603805130406311326696270282810800587882460381988411526065642492658262076626659212473756435780585840967680.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.13 | ms/batch 21.68 | loss 252.03 | ppl 28614552737653502257171067694848172298547404599592071003590464862800089482971928410710858236634688583685373952.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.14 | ms/batch 21.64 | loss 30.77 | ppl 23039414498975.89
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.15 | ms/batch 21.67 | loss 114.28 | ppl 42649899233016099721512773390415818695117201473536.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.16 | ms/batch 21.70 | loss 11.52 | ppl 100493.58
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.17 | ms/batch 21.70 | loss 317.55 | ppl 815726275545479695633488389740177976747197703114128165367260380427980127676553863654854731933857366236117357394058429932252136483464413184.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.18 | ms/batch 21.70 | loss 25.77 | ppl 155197427192.08
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.19 | ms/batch 21.64 | loss 369.54 | ppl 30719809710687382555254127209677193364134107054161358551463136481735636567547152289351828775826962125522833670812179893836211853370755090197541568562778257489920.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.20 | ms/batch 21.68 | loss 279.99 | ppl 39471923510345871401738280963066695928371072086205057051436642800763348777162417583183931345447939238829098846443588812800.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.21 | ms/batch 21.64 | loss 278.78 | ppl 11797578628784356509537897173931518807684976683003717106612413767893481752140164142296819663002098950175684242910339923968.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.22 | ms/batch 21.69 | loss 25.43 | ppl 110433643262.53
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.23 | ms/batch 21.66 | loss 21.33 | ppl 1831629197.66
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.24 | ms/batch 21.69 | loss 80.24 | ppl 70781605509742694629884554729488384.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.25 | ms/batch 21.67 | loss 138.20 | ppl 1047829196557743061613567133560035095274864316080809461153792.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.26 | ms/batch 21.72 | loss  9.56 | ppl 14181.43
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.27 | ms/batch 21.71 | loss 95.23 | ppl 228027121620823950262528402944170651549696.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.28 | ms/batch 21.67 | loss 27.09 | ppl 581251693290.24
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.29 | ms/batch 21.73 | loss 12.68 | ppl 321171.79
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.30 | ms/batch 21.71 | loss 280.99 | ppl 107600108190436242120791885480943959455727577444593689456847048150589091316463068599917628656121150605109761884869734957056.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.31 | ms/batch 21.69 | loss 38.62 | ppl 59174672717029152.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.32 | ms/batch 21.65 | loss 49.17 | ppl 2253326081387754422272.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.33 | ms/batch 21.74 | loss 622.18 | ppl 1623086492908256871600315866414975851146278443417616734592871379398042285387332391758673515775432710528040639987344382790822123264980432825689344153089219418883116542876195448056486532327768574576046976292906816036521285898980792369727112890604142820800793473091555557376.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.34 | ms/batch 21.69 | loss 511.58 | ppl 1503020188508280700968544252515040726915676243948186252035618094391132456970922925184597659898597606577852340395331884126370808806106853253024416752167880785954181158185557181964306411807518982441036895722736143344800366592.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.35 | ms/batch 21.70 | loss 27.83 | ppl 1217900285016.68
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.36 | ms/batch 21.70 | loss 24.17 | ppl 31538353540.25
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.37 | ms/batch 21.68 | loss 368.54 | ppl 11304718601893172145573224600951377556421071001985555107324763450100685426882964946964411978934268480395773011551776413515619714145904262991546452034329587482624.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.38 | ms/batch 21.69 | loss 58.77 | ppl 33272791625651362767831040.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.39 | ms/batch 21.70 | loss 49.57 | ppl 3360189014850018476032.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.40 | ms/batch 21.68 | loss 115.99 | ppl 237545431488952462228203005024471005290631094337536.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.41 | ms/batch 21.70 | loss 182.34 | ppl 15495811749688224713045395275756244561064801190235053148393025470046924718473216.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.42 | ms/batch 21.73 | loss 55.53 | ppl 1309655870945069778337792.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.43 | ms/batch 21.70 | loss 98.44 | ppl 5635590173230261095590462628004629284126720.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.44 | ms/batch 21.71 | loss 34.39 | ppl 863020845089474.12
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.45 | ms/batch 21.63 | loss 48.69 | ppl 1402117445306764492800.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.46 | ms/batch 21.70 | loss 15.29 | ppl 4363474.92
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.47 | ms/batch 21.71 | loss 176.33 | ppl 38114343522663781683693592998837434835071792472465565708269859623623989395456.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.48 | ms/batch 21.72 | loss 81.21 | ppl 184981965667187498917098708055097344.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.49 | ms/batch 21.68 | loss 86.80 | ppl 49542224397331778804537587006607196160.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.50 | ms/batch 21.67 | loss 179.73 | ppl 1136676712101759649218644989514026567796193413899734226247173404141390219182080.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.51 | ms/batch 21.69 | loss 182.17 | ppl 13016709004704462663701618954770284059649137914681880616851838121586288654024704.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.52 | ms/batch 21.66 | loss 65.12 | ppl 19030859849112102777185632256.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.53 | ms/batch 21.71 | loss 65.01 | ppl 17132443960676527656092565504.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.54 | ms/batch 21.72 | loss 532.67 | ppl 2169642198287426598063519805924388970972225825250257393621916378904884130711472857027600967320318721727922675761049871036382188964449532985599137355831515132122196596262354046123830452380022959657758237847939180583488250863761227776.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.55 | ms/batch 21.68 | loss 20.56 | ppl 850535707.57
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.56 | ms/batch 21.71 | loss 99.46 | ppl 15652416484160811517721642136608844097257472.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.57 | ms/batch 21.68 | loss 90.40 | ppl 1828056972016367996344334267398777470976.00
+Loaded parameters from params2.npz
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.59 | ms/batch 21.70 | loss 43.50 | ppl 7828952162951118848.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.60 | ms/batch 21.78 | loss  9.57 | ppl 14311.96
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.61 | ms/batch 21.78 | loss 441.26 | ppl 433971960176679793139725007381498816945519966381252825909807639691286998077033568952118591202066327244926544947418183050669545105067146742190418972872379300292339175176288249383866772429471744.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.62 | ms/batch 21.68 | loss 13.50 | ppl 727888.26
+Loaded parameters from params2.npz
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.64 | ms/batch 21.81 | loss 28.29 | ppl 1938919268080.03
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.65 | ms/batch 21.73 | loss 20.31 | ppl 663566510.38
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.66 | ms/batch 21.75 | loss 82.10 | ppl 454436034514686371860870895828467712.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.67 | ms/batch 21.75 | loss 87.92 | ppl 152603774834908310026312206975483510784.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.68 | ms/batch 21.73 | loss 84.33 | ppl 4209841226086004832563527718235275264.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.69 | ms/batch 21.69 | loss 27.41 | ppl 800389449322.01
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.70 | ms/batch 21.77 | loss 43.43 | ppl 7295248230786504704.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.71 | ms/batch 21.80 | loss 25.42 | ppl 109440031442.59
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.72 | ms/batch 21.74 | loss 132.62 | ppl 3961815713591531355501145564736480393473474982516669546496.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.73 | ms/batch 21.75 | loss 89.61 | ppl 823559558782630349039562243159000875008.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.74 | ms/batch 21.75 | loss 56.79 | ppl 4620381601421401163563008.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.75 | ms/batch 21.74 | loss 104.04 | ppl 1534660965316042388183244191681727006444093440.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.76 | ms/batch 21.81 | loss 54.55 | ppl 490806502333636610621440.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.77 | ms/batch 21.74 | loss 77.56 | ppl 4821478400225884816083150958493696.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.78 | ms/batch 21.77 | loss 20.23 | ppl 611080797.24
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.79 | ms/batch 21.74 | loss 37.95 | ppl 30319467905804072.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.80 | ms/batch 21.76 | loss 188.73 | ppl 9234904569060678011664564737652392913972227955898774465722750010951894453345845248.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.81 | ms/batch 21.73 | loss 42.61 | ppl 3205630374662063616.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.82 | ms/batch 21.76 | loss 84.34 | ppl 4239256177796793796485928759689478144.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.83 | ms/batch 21.74 | loss 157.34 | ppl 214577498560971512106260635817735470251652032699141447959154117312512.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.84 | ms/batch 21.72 | loss 55.57 | ppl 1363922847909617017552896.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.85 | ms/batch 21.78 | loss 36.92 | ppl 10773614789785950.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.86 | ms/batch 21.75 | loss 53.26 | ppl 134551027791296169246720.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.87 | ms/batch 21.72 | loss 77.00 | ppl 2757288020133674907809970741313536.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.88 | ms/batch 21.79 | loss 327.50 | ppl 16998397507350433286821869045661120022656443322421885626791287370762161027963446565338952895896917619258659564451338454351187219486417675616256.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.89 | ms/batch 21.75 | loss 645.99 | ppl 35411630262137969224404698683045736117913192565851340592854899065299587411938107356022558114954808372555428209931315901143397265879540682053375443381259815163732801041408622600685852818624503749767781158128687732020145370123630302329611780738943808661184945354079388206375075053568.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.90 | ms/batch 21.74 | loss 45.69 | ppl 69799477860529520640.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.91 | ms/batch 21.72 | loss 426.51 | ppl 169846779247028168834242430458419797941506253381591224512502581811992959220230337300162876658174027515541953861930054402519496332764662995615818649644947632256958363047815846686328094720.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.92 | ms/batch 21.76 | loss 338.71 | ppl 1257507962368712324916418432236022404141065525604057898252859516088696372352823868551207848162358083522809623378884871603435686573223533741768441856.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.93 | ms/batch 21.74 | loss 248.90 | ppl 1243195345482601092616344758584586218550423157999608750024361984064591373833271986582359418109112270408646656.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.94 | ms/batch 21.78 | loss 211.97 | ppl 114521158840153200559496355613065606809994752288376297070341946399120101627956979498626318336.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.95 | ms/batch 21.77 | loss 226.38 | ppl 206965834479973794256585716824772251786886905112284121658212978800030218991154560864119823079047168.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.96 | ms/batch 21.78 | loss 272.36 | ppl 19243118084227910774037877117480361253793699362694776007205913211869306274374050182238674985221329536073597637340692480.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.97 | ms/batch 21.75 | loss 261.82 | ppl 510653560461744993936887955500362595043933454247105164966682626230346480796708345468511533600931303541737720381440.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.98 | ms/batch 21.80 | loss 376.45 | ppl 30788844566218499186621712719797879637150853372687333586042261375080807758890984986601794143113579256480420024903299332823891735292702591313772311718585495130734592.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.99 | ms/batch 21.75 | loss 424.31 | ppl 18894693342083837597783393037953715258122602432393449426882988486303844542530986459125811226755357268621777508971189261389929946389679249406073248904289359336790633064503071965756522496.00
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 2.00 | ms/batch 21.74 | loss 367.50 | ppl 3992585292048507859091609155484964760830250797873796590722749106870623547973816860579452280344937604092846841687697884848020258156007727768985496131066306494464.00
