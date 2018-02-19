@@ -89,11 +89,11 @@ class LstmCell(nn.Module):
             raise ValueError('Either batch_size or np_arrays must be specified.')
 
         if batch_size != 0:
-            ret = (Variable(torch.Tensor(batch_size, self.hidden_size).zero_()),
-                   Variable(torch.Tensor(batch_size, self.hidden_size).zero_()))
+            ret = (Variable(torch.Tensor(batch_size, self.hidden_size).zero_().type(self.w_i.type())),
+                   Variable(torch.Tensor(batch_size, self.hidden_size).zero_().type(self.w_i.type())))
         elif np_arrays is not None:
-            ret = (Variable(torch.from_numpy(np_arrays[0])),
-                   Variable(torch.from_numpy(np_arrays[1])))
+            ret = (Variable(torch.from_numpy(np_arrays[0]).type(self.w_i.type())),
+                   Variable(torch.from_numpy(np_arrays[1]).type(self.w_i.type())))
         if next(self.parameters()).is_cuda:
             return tuple(t.cuda() for t in ret)
         else:
