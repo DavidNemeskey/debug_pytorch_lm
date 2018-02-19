@@ -18,7 +18,7 @@ The (pytorch) code in this repository is basically the copy of the official exam
 1. LSTM has been implemented from scratch (note that its input is batch size x time steps as in TensorFlow);
 1. Only the small model is implemented.
 
-With this, the loss at `LR == 1.0` actually blows up. Choosing the optimal learning rate is only possible via a full parameter sweep (see below), but with it the model [**does** arrive at the right numbers](logs/pytorch.log).
+With this, the loss at `LR == 1.0` actually **blows up**. Choosing the optimal learning rate (0.37) is only possible via a full parameter sweep (see below), but with it the model [_does_ arrive at the right numbers](logs/pytorch.log). However, any kind of optimization (that relies on local smoothness of the learning rate) is out of the question.
 
 ## Comparison with TensorFlow
 
@@ -91,3 +91,12 @@ python scripts/zaremba_tf.py -d ptb/ -L params.npz
 ```
 
 Both scripts accept the `-T <iterations>` parameter, which runs for `<iterations>`, printing the basically everything (inputs, intermediate values, gradients, loss, etc.) at each step, then exits.
+
+Versions of the libraries used:
+
+| Library | Version | Comments |
+|---------|---------|----------|
+| Pytorch | 0.4.0a0+c65bd66 | 0.3 is no better |
+| Tensorflow | 1.4.1 | In a different environment, because in conda, it brings in a different CuDNN version |
+| CuDNN   | 6021 | According to `torch.backends.cudnn.version()` |
+| CUDA    | 8.0  | |
