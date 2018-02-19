@@ -15,7 +15,7 @@ There are two discrepancies between the implementation in Zaremba (2014) and the
 
 The (pytorch) code in this repository is basically the copy of the official example, with the first two items above changed to reflect the implementation in the paper. The last difference is left as-is, because it is easy to account for (it results in better perplexities scores by approximately 5-10 point). Also there are a few other changes:
 
-1. LSTM has been implemented from scratch;
+1. LSTM has been implemented from scratch (note that its input is batch size x time steps as in TensorFlow);
 1. Only the small model is implemented.
 
 With this, the loss at `LR == 1.0` actually blows up; making it smaller has strange effects, but even with the optimal LR it **does not** arrive at the right numbers.
