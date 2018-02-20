@@ -1,0 +1,595 @@
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.01 | ms/batch 154.01 | loss  7.68 | ppl  2161.08
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.02 | ms/batch 155.23 | loss  7.25 | ppl  1403.39
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.03 | ms/batch 155.56 | loss  7.12 | ppl  1235.53
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.04 | ms/batch 155.96 | loss  7.06 | ppl  1168.75
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.05 | ms/batch 156.18 | loss  7.04 | ppl  1139.76
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.06 | ms/batch 153.89 | loss  7.02 | ppl  1122.66
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.07 | ms/batch 149.61 | loss  7.02 | ppl  1113.65
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.08 | ms/batch 157.12 | loss  7.01 | ppl  1109.84
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.10 | ms/batch 156.12 | loss  7.01 | ppl  1111.18
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.11 | ms/batch 154.92 | loss  7.01 | ppl  1102.47
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.12 | ms/batch 155.85 | loss  7.00 | ppl  1091.42
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.13 | ms/batch 155.94 | loss  7.05 | ppl  1148.60
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.14 | ms/batch 155.83 | loss  7.03 | ppl  1125.89
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.15 | ms/batch 152.41 | loss  7.02 | ppl  1115.34
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.16 | ms/batch 155.45 | loss  7.05 | ppl  1153.80
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.17 | ms/batch 156.22 | loss  7.21 | ppl  1359.03
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.18 | ms/batch 152.40 | loss  7.07 | ppl  1178.88
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.19 | ms/batch 157.06 | loss  6.98 | ppl  1072.02
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.20 | ms/batch 156.52 | loss  7.02 | ppl  1115.67
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.21 | ms/batch 152.30 | loss  7.23 | ppl  1377.47
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.22 | ms/batch 160.09 | loss  7.60 | ppl  1998.28
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.23 | ms/batch 155.92 | loss  7.21 | ppl  1356.28
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.24 | ms/batch 150.56 | loss  7.27 | ppl  1433.70
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.25 | ms/batch 154.34 | loss  7.05 | ppl  1147.23
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.26 | ms/batch 190.30 | loss  7.35 | ppl  1558.45
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.27 | ms/batch 398.28 | loss 21.02 | ppl 1339610224.36
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.28 | ms/batch 153.35 | loss  7.11 | ppl  1221.87
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.29 | ms/batch 779.97 | loss 26.33 | ppl 271717778395.59
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.30 | ms/batch 886.50 | loss 41.90 | ppl 1567617880071289088.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.31 | ms/batch 156.09 | loss  7.30 | ppl  1481.33
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.32 | ms/batch 160.91 | loss  7.26 | ppl  1415.95
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.33 | ms/batch 153.37 | loss  7.32 | ppl  1503.62
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.34 | ms/batch 321.49 | loss  7.49 | ppl  1786.17
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.35 | ms/batch 210.53 | loss  8.89 | ppl  7249.88
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.36 | ms/batch 154.25 | loss  7.17 | ppl  1303.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.37 | ms/batch 154.93 | loss  6.96 | ppl  1058.10
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.38 | ms/batch 398.49 | loss 12.85 | ppl 382076.16
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.39 | ms/batch 155.76 | loss  7.14 | ppl  1258.58
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.40 | ms/batch 191.52 | loss  7.20 | ppl  1345.44
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.41 | ms/batch 651.80 | loss 14.43 | ppl 1855044.40
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.42 | ms/batch 357.75 | loss  7.64 | ppl  2080.43
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.43 | ms/batch 155.53 | loss  7.29 | ppl  1461.79
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.44 | ms/batch 154.84 | loss  7.27 | ppl  1430.31
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.45 | ms/batch 196.21 | loss 10.25 | ppl 28250.59
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.46 | ms/batch 157.95 | loss  7.82 | ppl  2484.67
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.47 | ms/batch 184.29 | loss  7.79 | ppl  2427.11
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.48 | ms/batch 310.20 | loss  8.22 | ppl  3732.28
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.49 | ms/batch 199.52 | loss  7.38 | ppl  1600.07
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.50 | ms/batch 154.37 | loss  7.20 | ppl  1340.37
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.51 | ms/batch 716.82 | loss 14.77 | ppl 2600659.53
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.52 | ms/batch 477.11 | loss 15.05 | ppl 3426611.81
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.53 | ms/batch 176.81 | loss  7.56 | ppl  1912.58
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.54 | ms/batch 186.71 | loss  7.29 | ppl  1460.11
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.55 | ms/batch 332.22 | loss  8.14 | ppl  3426.70
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.56 | ms/batch 341.57 | loss 23.16 | ppl 11425781609.47
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.57 | ms/batch 433.48 | loss 29.98 | ppl 10478909585127.53
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.58 | ms/batch 181.54 | loss  7.66 | ppl  2129.79
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.59 | ms/batch 197.69 | loss  9.38 | ppl 11885.72
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.60 | ms/batch 231.71 | loss  7.40 | ppl  1632.83
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.61 | ms/batch 167.80 | loss  9.03 | ppl  8333.06
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.62 | ms/batch 225.58 | loss 11.64 | ppl 113014.59
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.63 | ms/batch 722.70 | loss 33.93 | ppl 545757471053546.88
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.64 | ms/batch 665.57 | loss 78.49 | ppl 12242417612563452295066523352956928.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.65 | ms/batch 640.42 | loss 22.09 | ppl 3928135269.39
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.66 | ms/batch 528.10 | loss 83.49 | ppl 1817770009522808113661394656178470912.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.67 | ms/batch 253.53 | loss 11.90 | ppl 147242.72
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.68 | ms/batch 231.98 | loss  7.70 | ppl  2217.64
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.69 | ms/batch 261.73 | loss  7.60 | ppl  2002.54
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.70 | ms/batch 1035.12 | loss 91.04 | ppl 3444332757417107672347365405802828398592.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.71 | ms/batch 537.77 | loss 106.40 | ppl 16127978856270201747839864809363971303171686400.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.72 | ms/batch 205.68 | loss 113.78 | ppl 25948676708272573615065140845400570604332091703296.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.73 | ms/batch 514.03 | loss 112.24 | ppl 5554274880655810540989157145262920982088978006016.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.74 | ms/batch 353.97 | loss 16.89 | ppl 21614490.66
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.75 | ms/batch 659.99 | loss 84.60 | ppl 5515765687548948335577415802968604672.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.76 | ms/batch 359.59 | loss  8.97 | ppl  7846.41
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.77 | ms/batch 410.11 | loss 144.05 | ppl 361441245438570415321327806489256412945769018891693544011988992.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.78 | ms/batch 348.32 | loss 16.94 | ppl 22783265.73
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.79 | ms/batch 155.52 | loss  7.20 | ppl  1335.78
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.80 | ms/batch 153.86 | loss  7.09 | ppl  1196.86
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.81 | ms/batch 155.78 | loss  7.17 | ppl  1299.93
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.82 | ms/batch 505.97 | loss  7.21 | ppl  1357.77
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.83 | ms/batch 273.32 | loss  7.31 | ppl  1501.01
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.84 | ms/batch 763.79 | loss 74.77 | ppl 295255982685870430412476791128064.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.85 | ms/batch 1210.93 | loss 43.83 | ppl 10887962043224393728.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.86 | ms/batch 1028.15 | loss 65.44 | ppl 26347139618653975863518822400.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.87 | ms/batch 1019.38 | loss 68.41 | ppl 513940133065126490007060611072.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.88 | ms/batch 439.01 | loss 134.15 | ppl 18219874077598170581107104464213620813838618373599094898688.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.89 | ms/batch 319.55 | loss 186.10 | ppl 661671359230754656684043790394814456751641358689873336272621152303064221497688064.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.90 | ms/batch 241.94 | loss 220.19 | ppl 423259213423428488207280287926637509589359917880983191299829793651481164475378682562460304539648.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.91 | ms/batch 192.87 | loss 257.92 | ppl 10300127153515582212508484101958797343058708451486421696026816799354812865264874806923482275135879092572463824896.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.92 | ms/batch 224.39 | loss 241.56 | ppl 813336345712653522127116503471072168297001337072230222644405399236669675707126058135757598855039090163712.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.93 | ms/batch 240.01 | loss 207.49 | ppl 1287739692983407188458475651842761067862459499757227189911288251495869022878934490402521088.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.94 | ms/batch 291.50 | loss 180.03 | ppl 1541502018395746387352580257015457902535334982028894413918765962067376653467648.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.95 | ms/batch 240.42 | loss 193.04 | ppl 688942800022609685826859711878936095950710676814380736452439926200883954233880084480.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.96 | ms/batch 210.43 | loss 236.21 | ppl 3834036523754643257412595274727997029708059403476511861219537675965101429728256863839004051738632126464.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.97 | ms/batch 321.37 | loss 122.54 | ppl 165865602249246742248257709211099976836536794267779072.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.98 | ms/batch 741.24 | loss 15.34 | ppl 4603535.74
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 0.99 | ms/batch 876.26 | loss 45.33 | ppl 48360726707460571136.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.00 | ms/batch 654.56 | loss 35.01 | ppl 1596826207069109.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.01 | ms/batch 822.94 | loss 32.09 | ppl 86332821211672.03
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.02 | ms/batch 1032.41 | loss 56.04 | ppl 2172041978668583552548864.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.03 | ms/batch 703.49 | loss 30.97 | ppl 28204025723707.06
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.04 | ms/batch 196.80 | loss 227.22 | ppl 477567768099226609091266443362717381797757304318021085742813915428902597397532966726185178458226688.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.05 | ms/batch 300.29 | loss 46.47 | ppl 152335528682870439936.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.06 | ms/batch 353.37 | loss 65.14 | ppl 19562521651745716559750889472.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.07 | ms/batch 300.80 | loss 48.66 | ppl 1356532480435966967808.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.08 | ms/batch 200.41 | loss  9.68 | ppl 16067.23
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.09 | ms/batch 490.71 | loss 33.51 | ppl 357676268060827.25
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.10 | ms/batch 234.60 | loss 13.10 | ppl 487094.48
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.11 | ms/batch 214.46 | loss 10.50 | ppl 36187.04
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.12 | ms/batch 220.12 | loss 369.48 | ppl 29081523069447528970901104847312152928661436355199500535115063153947805185771216077756594732188447354193639771861182714426023520749671681675234180607070041014272.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.13 | ms/batch 280.81 | loss 248.63 | ppl 955950239175638573905041415328189840825565430644062611624743503533929656719121963840269216659414904217796608.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.14 | ms/batch 388.61 | loss 50.95 | ppl 13408172569750839230464.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.15 | ms/batch 957.07 | loss 104.14 | ppl 1682880237873585711965076522703255127977885696.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.16 | ms/batch 204.67 | loss 11.94 | ppl 152890.62
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.17 | ms/batch 239.99 | loss 322.33 | ppl 96717303171122905091900694699664950277509279947483282240883409419851355175460548929964363305244363971420042311251287197584959602961200185344.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.18 | ms/batch 218.73 | loss 11.48 | ppl 96667.45
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.19 | ms/batch 283.68 | loss 367.70 | ppl 4918835307915424500901548412535266629720539066249082777281068831754074829847071362283891087493035218021285616609228864227194514487584728386838029832540200632320.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.20 | ms/batch 258.42 | loss 289.82 | ppl 736577185252155024005786286493764687473137425434142597687088417422993916461790640346441113780609215438129948766121012232192000.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.21 | ms/batch 261.08 | loss 289.73 | ppl 674602349537943689294695664852621991830529799078715322452256930180401413517054590534261881957141130097033931141608531273187328.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.22 | ms/batch 320.23 | loss 16.36 | ppl 12725068.11
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.23 | ms/batch 245.58 | loss  8.40 | ppl  4466.78
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.24 | ms/batch 615.24 | loss 89.05 | ppl 469924205985640937626289622411254956032.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.25 | ms/batch 392.69 | loss 155.71 | ppl 42214457984895639680011345805746672969600383692738155160786496913408.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.26 | ms/batch 319.36 | loss 11.85 | ppl 139525.09
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.27 | ms/batch 223.81 | loss 15.66 | ppl 6353284.12
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.28 | ms/batch 594.23 | loss 35.88 | ppl 3819987088310405.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.29 | ms/batch 523.80 | loss 38.92 | ppl 79986930575912512.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.30 | ms/batch 265.99 | loss 289.17 | ppl 384804990095982390079502641162100753080267779385067695541613764351775393546400270139196271429233577937405573689271649010974720.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.31 | ms/batch 804.62 | loss 95.02 | ppl 184409695589167719545847267543668091781120.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.32 | ms/batch 247.75 | loss 13.90 | ppl 1091017.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.33 | ms/batch 414.71 | loss 33.30 | ppl 290955629209587.12
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.34 | ms/batch 253.06 | loss 521.56 | ppl 32444338234733878595605022315545600560698507830256728988316618876188409911234990766934697505351246183690496630179613335811671125195151831926206845736627793249655945584576132357540713001687079280645452194458554485339853938491392.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.35 | ms/batch 517.13 | loss 29.02 | ppl 4018583862929.73
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.36 | ms/batch 426.31 | loss 28.65 | ppl 2781832111213.65
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.37 | ms/batch 324.56 | loss 373.94 | ppl 2500787194135083965109948416185852279211841679130172697418426776232378191295451248220198420951000776660986835943114585704909999132945500831441138291555480834670592.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.38 | ms/batch 291.26 | loss 10.16 | ppl 25850.10
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.39 | ms/batch 320.70 | loss 10.65 | ppl 42161.50
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.40 | ms/batch 273.26 | loss 306.84 | ppl 18124839577155011872521773964220665532614094185761156822244858123333341927170570405946974059449839678846184373571172017799332936810496.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.41 | ms/batch 364.13 | loss 168.57 | ppl 16156943040762144767694530820066256374530621079059101592552639399643316224.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.42 | ms/batch 308.45 | loss 15.81 | ppl 7344262.33
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.43 | ms/batch 329.18 | loss 62.52 | ppl 1421859020086114842620985344.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.44 | ms/batch 516.25 | loss 69.59 | ppl 1672684184224245204150122446848.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.45 | ms/batch 346.98 | loss 60.51 | ppl 189804553611350027347689472.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.46 | ms/batch 637.18 | loss 37.81 | ppl 26345611907353492.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.47 | ms/batch 368.80 | loss 181.78 | ppl 8797917891182158903749400472097155160275464622687658144084226805172178411061248.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.48 | ms/batch 305.59 | loss 85.23 | ppl 10358482951327148639525196819272302592.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.49 | ms/batch 548.75 | loss 103.82 | ppl 1227799508427886521970207101826485436928753664.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.50 | ms/batch 978.38 | loss 83.82 | ppl 2537364909561130085720905449289547776.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.51 | ms/batch 299.58 | loss 173.05 | ppl 1432580552942814812732692125922764366191001906292088430845784740673322221568.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.52 | ms/batch 493.97 | loss 25.08 | ppl 78148557957.65
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.53 | ms/batch 349.69 | loss 65.77 | ppl 36469344114471780870424363008.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.54 | ms/batch 224.10 | loss 515.35 | ppl 64924089288673859772769209570083552113601655809914522179905608244423654221112419057080257424668549838683855641281735933165147459309766824468166653522272838611660137921361312433954653672206417098290113690446295082493752115200.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.55 | ms/batch 502.81 | loss 42.19 | ppl 2103351032504880640.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.56 | ms/batch 422.74 | loss 98.25 | ppl 4674350192158695293133580258452188841377792.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.57 | ms/batch 465.68 | loss 121.73 | ppl 73859464821925205111938276824010703851262173566205952.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.59 | ms/batch 433.43 | loss 41.50 | ppl 1057233748856792320.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.60 | ms/batch 343.85 | loss 10.49 | ppl 35783.79
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.61 | ms/batch 230.50 | loss 294.85 | ppl 112596376257537904273478959411995147170175392251425961224506016419986649731702014638694693318868178139741572089635490644906475520.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.62 | ms/batch 544.23 | loss 22.28 | ppl 4766359451.88
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.64 | ms/batch 673.32 | loss 15.28 | ppl 4339576.64
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.65 | ms/batch 309.14 | loss 75.52 | ppl 625227857621888262652911245328384.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.66 | ms/batch 367.70 | loss 54.67 | ppl 550985856960407715971072.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.67 | ms/batch 295.24 | loss 59.09 | ppl 46055285510922269599203328.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.68 | ms/batch 309.43 | loss 41.20 | ppl 779852238926421632.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.69 | ms/batch 313.92 | loss 58.84 | ppl 35961010403962336143474688.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.70 | ms/batch 549.76 | loss 102.39 | ppl 292277996194249011654325416567608587784814592.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.71 | ms/batch 384.21 | loss 42.51 | ppl 2908502220970714112.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.72 | ms/batch 400.00 | loss 89.65 | ppl 862173204233056126715117921662303993856.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.73 | ms/batch 416.91 | loss 49.57 | ppl 3383683808757447917568.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.74 | ms/batch 401.63 | loss 47.89 | ppl 629741329149682253824.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.75 | ms/batch 740.83 | loss 100.62 | ppl 50142231355858201701184814757351981043417088.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.76 | ms/batch 548.04 | loss 101.66 | ppl 141228786174903798935729411241941096976089088.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.77 | ms/batch 410.09 | loss 57.33 | ppl 7931742979981759364464640.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.78 | ms/batch 401.92 | loss 15.75 | ppl 6951752.85
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.79 | ms/batch 393.64 | loss 73.62 | ppl 94030489417047060394685121953792.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.80 | ms/batch 311.26 | loss 182.89 | ppl 26785868809176178483344110156592159766392544614027112445438439092198422010134528.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.81 | ms/batch 517.67 | loss 72.11 | ppl 20705742502244823424229468798976.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.82 | ms/batch 531.87 | loss 49.46 | ppl 3022278142076579741696.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.83 | ms/batch 449.72 | loss 147.13 | ppl 7876220255208961569769390121104946255738008525900931500007751680.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.84 | ms/batch 513.89 | loss 82.31 | ppl 557984175729508839775068933081530368.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.85 | ms/batch 286.33 | loss 525.15 | ppl 1178441198988039476518197306807631830753006043283109121940713476408444228682673067752438016513616005452920179420720053021821510719772943603355334681126139895765532522109298141866546213134091122329923529148786999127850786968567808.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.86 | ms/batch 438.34 | loss 100.10 | ppl 29675813217552842585699450497665011344736256.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.87 | ms/batch 417.35 | loss 86.37 | ppl 32421171547266702817568001206696017920.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.88 | ms/batch 247.46 | loss 258.98 | ppl 29853344143182800013792023691187686442070677557503243275924566552749782367179355792268838607283298592548217421824.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.89 | ms/batch 239.07 | loss 639.84 | ppl 75582537506715905237987249214384521432214755995193658693441504412902530710397364671686794588974886289653371823709800589819628528955531326573591457181885217972466615700281735975891622657537095676190493365100405028268456449127154044330479567967184056657054755567671530829727662080.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.90 | ms/batch 516.83 | loss 46.40 | ppl 141839877037712769024.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.91 | ms/batch 244.52 | loss 452.44 | ppl 31009862643019956865126321822865352049631787158759733211751902565518255281165652245100621333237940750065515942603808579914042938850236788355990409451429438331142139325763992721253593336756737933312.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.92 | ms/batch 283.85 | loss 314.93 | ppl 59464972742713832991024268678594578314698106078237333456145401962978134852843274142805893827482811821847593388511728107773332774734266368.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.93 | ms/batch 261.92 | loss 253.24 | ppl 95334521741414192709996573987478185994872228800610278957023129925906086437442028668743475465829364619683037184.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.94 | ms/batch 230.87 | loss 214.27 | ppl 1142366486988687268052334885383405419903224236857904183743088861055608407496242850959760293888.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.95 | ms/batch 282.07 | loss 206.09 | ppl 319912054478996438222384022567920814438546799748241292653064131044753677533038899697287168.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.96 | ms/batch 276.28 | loss 252.72 | ppl 57120634456025468953413774984294706737775416679777595696067560080482648846269155326204622915010011033252134912.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.97 | ms/batch 294.06 | loss 275.77 | ppl 583490689147307856187775205508633974539651775154909536205091292930642131381090556358615828888716898404290855412330135552.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.98 | ms/batch 232.41 | loss 371.03 | ppl 136877641832896714632443838071604466917056623479054715192780990727598335946444310470994587040406534498322642897390081753784207835842060779896933716927004708700160.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 1.99 | ms/batch 203.40 | loss 415.10 | ppl 1893807799639953515453002914054095183420732442929297056231147573436254362616443863795784326597301705839999177083214608814501155313681239045197999346132488223157632382232893960749056.00
+WARNING: You have a CUDA device, so you should probably run with --cuda
+Loaded parameters from params2.npz
+| epoch   1 |   200/ 2323 batches | lr 2.00 | ms/batch 207.02 | loss 354.37 | ppl 7939295329687799334907785498541379300276788369843400004223004162029037917623191447113055386016499888342367208079148560575925348718482077789067016386117632.00
