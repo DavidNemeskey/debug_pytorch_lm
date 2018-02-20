@@ -358,7 +358,7 @@ def train(sess, model, corpus, train_data, epoch, lr, batch_size,
                   flush=True)
             total_loss = 0
             start_time = time.time()
-            # sys.exit()  # Was here for the LR search
+            # sys.exit()  # Was here for the LR sweep
 
 
 def evaluate(sess, model, corpus, data_source, batch_size, num_steps):
