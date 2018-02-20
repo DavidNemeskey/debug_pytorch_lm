@@ -52,11 +52,12 @@ As the table shows, while the loss is the same for the first few iterations, alr
 ### Hyperparameter search
 Since the perplexity even after 1/10 of the data is a very strong indicator for the final score, I did a quick hyperparameter search to find the optimal LR. Who knows, maybe it is simply different for TF and PT? I ran the training up to 200 iterations, and tried values from 0.01 to 2.0 in 0.01 increments. The results are in the `log` directory:
 
-| File | Library | Float size |
-|------|---------|------------|
-| `tf_loss_at_lr.txt` | TensorFlow | 32 bit |
-| `pt_loss_at_lr.txt` | Pytorch    | 32 bit |
-| `pt_loss_at_lr_64.txt` | Pytorch    | 64 bit |
+| File | Library | Float size | Device |
+|------|---------|------------|--------|
+| `tf_loss_at_lr.txt` | TensorFlow | 32 bit | GPU |
+| `pt_loss_at_lr.txt` | Pytorch    | 32 bit | GPU |
+| `pt_loss_at_lr_64.txt` | Pytorch    | 64 bit | GPU |
+| `pt_loss_at_lr_cpu.txt` | Pytorch    | 32 bit | CPU |
 
 The following graphs show the perplexity against the LR.
 
@@ -72,7 +73,11 @@ The following graphs show the perplexity against the LR.
 |-----------------------|
 | <img src="logs/pt_loss_at_lr_64.png" alt="Pytorch PPL vs LR, 64 bit" width="640"> |
 
-As can be seen, while the TF graph is nice and smooth(ish), with no extreme values and only two spikes, both PT graphs are all over the place. (Perplexity is cut at 3000 -- the maximum value is in the order of `e+280`.) It seems as if PT is not just more sensitive to the learning rate, but its effect on the result is completely chaotic. It seems that the underlying implementation in Pytorch is **numerically unstable**.
+| Pytorch, PPL vs LR, 32 bit, CPU (cut at 3000) |
+|-----------------------|
+| <img src="logs/pt_loss_at_lr_cpu.png" alt="Pytorch PPL vs LR, 32 bit, CPU" width="640"> |
+
+As can be seen, while the TF graph is nice and smooth(ish), with no extreme values and only two spikes, the PT graphs (GPU / CPU, 32 / 64 bit) are all over the place. (Perplexity is cut at 3000 -- the maximum value is in the order of `e+280`.) It seems as if PT is not just more sensitive to the learning rate, but its effect on the result is completely chaotic. It seems that the underlying implementation in Pytorch is **numerically unstable**.
 
 (Note that this instability persists if I replace my `SequenceLoss` with the original loss function multiplied by `num_steps`, so the problem is not because of that.)
 
@@ -100,3 +105,5 @@ Versions of the libraries used:
 | Tensorflow | 1.4.1 | In a different environment, because in conda, it brings in a different CuDNN version |
 | CuDNN   | 6021 | According to `torch.backends.cudnn.version()` |
 | CUDA    | 8.0  | |
+| mkl     | 2018.0.1 | from `conda list` |
+| numpy   | 1.14.0 | from `conda list` |
