@@ -149,11 +149,15 @@ class TestChainerLstmCells(unittest.TestCase):
             # Chainer
             pti_cell.cleargrads()
             pti_h, pti_c = pti_cell(pti_input, pti_hidden)
-            pti_target = Variable(pti_cell.xp.array([0, 1], dtype=xp.float32))
-            pti_loss = (pti_h - pti_target).norm(2)
+            pti_target = F.broadcast_to(
+                Variable(pti_cell.xp.array([0, 1], dtype=pti_cell.xp.float32)),
+                shape=pti_h.shape
+            )
+            # pti_loss = F.normalize(pti_h - pti_target).norm(2)
+            pti_loss = F.sqrt(F.sum((pti_h - pti_target) ** 2))
             pti_loss.backward()  # retain_graph=True)
             pti_h_np, pti_c_np = (F.copy(v, -1).data for v in (pti_h, pti_c))
-            pti_loss_np = F.copy(pti_loss, -1).data[0]
+            pti_loss_np = np.asscalar(F.copy(pti_loss, -1).data)
             pti_grads_dict = {name: F.copy(p.grad, -1).data
                               for name, p in pti_cell.namedparams()}
 

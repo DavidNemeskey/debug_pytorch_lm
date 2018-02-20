@@ -69,7 +69,7 @@ class LstmCell(Chain):
 
         if self.bias:
             print('SHAPES', ifgo.shape, self.b_i.shape, self.b_h.shape)
-            ifgo += self.b_i + self.b_h
+            ifgo += F.broadcast_to(self.b_i + self.b_h, shape=ifgo.shape)
 
         i = F.sigmoid(ifgo[:, :self.hidden_size])
         f = F.sigmoid(ifgo[:, self.hidden_size:2*self.hidden_size])
