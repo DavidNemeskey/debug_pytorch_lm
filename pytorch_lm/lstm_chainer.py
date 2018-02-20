@@ -40,12 +40,35 @@ class LstmCell(Chain):
         for weight in self.params():
             uniform(weight.data)
 
+    def save_parameters(self, out_dict=None, prefix=''):
+        """
+        Saves the parameters into a dictionary that can later be e.g. savez'd.
+        If prefix is specified, it is prepended to the names of the parameters,
+        allowing for hierarchical saving / loading of parameters of a composite
+        model.
+        """
+        if out_dict is None:
+            out_dict = {}
+        for name, p in self.namedparams():
+            # The name starts with a /
+            out_dict[prefix + name[1:]] = F.copy(p, -1).data
+        return out_dict
+
+    def load_parameters(self, data_dict, prefix=''):
+        """Loads the parameters saved by save_parameters()."""
+        device_id = self._device_id if self._device_id is not None else -1
+        for name, value in data_dict.items():
+            real_name = name[len(prefix):]
+            param = getattr(self, real_name)
+            param.data = F.copy(value, device_id).data
+
     def __call__(self, input, hidden):
         h_t, c_t = hidden
 
         ifgo = F.matmul(input, self.w_i) + F.matmul(h_t, self.w_h)
 
         if self.bias:
+            print('SHAPES', ifgo.shape, self.b_i.shape, self.b_h.shape)
             ifgo += self.b_i + self.b_h
 
         i = F.sigmoid(ifgo[:, :self.hidden_size])
@@ -74,7 +97,7 @@ class LstmCell(Chain):
                                                  dtype=self.w_i.dtype)),
                        chainer.Variable(xp.zeros((batch_size, self.hidden_size),
                                                  dtype=self.w_i.dtype)))
-            else np_arrays is not None:
+            else:
                 ret = (chainer.Variable(np_arrays[0]),
                        chainer.Variable(np_arrays[0]))
         return ret
