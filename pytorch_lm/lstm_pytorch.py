@@ -96,6 +96,7 @@ class LstmCell(nn.Module):
                    Variable(torch.from_numpy(np_arrays[1]).type(self.w_i.type())))
         return ret
 
+
 class Lstm(nn.Module):
     """
     Several layers of LstmCells. Input is batch_size x num_steps x input_size,

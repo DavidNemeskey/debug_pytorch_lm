@@ -4,6 +4,7 @@
 """Implements a very basic version of LSTM."""
 import tensorflow as tf
 
+
 class LstmCell(object):
     def __init__(self, input_size, hidden_size, batch_size, bias=True):
         super(LstmCell, self).__init__()

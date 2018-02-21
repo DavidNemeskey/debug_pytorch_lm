@@ -3,12 +3,12 @@
 
 """Implements a very basic version of LSTM."""
 import chainer
-from chainer import Link, Chain, ChainList
+from chainer import Link, Chain
 from chainer.backends import cuda
 import chainer.functions as F
-import chainer.links as L
 
-class LstmCell(Chain):
+
+class LstmCell(Link):
     """
     A reimplementation of the LSTM cell, for comparison with the Pytorch and
     TensorFlow implementations.
@@ -68,7 +68,6 @@ class LstmCell(Chain):
         ifgo = F.matmul(input, self.w_i) + F.matmul(h_t, self.w_h)
 
         if self.bias:
-            print('SHAPES', ifgo.shape, self.b_i.shape, self.b_h.shape)
             ifgo += F.broadcast_to(self.b_i + self.b_h, shape=ifgo.shape)
 
         i = F.sigmoid(ifgo[:, :self.hidden_size])
@@ -98,6 +97,60 @@ class LstmCell(Chain):
                        chainer.Variable(xp.zeros((batch_size, self.hidden_size),
                                                  dtype=self.w_i.dtype)))
             else:
-                ret = (chainer.Variable(np_arrays[0]),
-                       chainer.Variable(np_arrays[0]))
+                ret = (chainer.Variable(xp.array(np_arrays[0], copy=False)),
+                       chainer.Variable(xp.array(np_arrays[1], copy=False)))
         return ret
+
+
+class Lstm(Chain):
+    """
+    Several layers of LstmCells. Input is batch_size x num_steps x input_size.
+    """
+    def __init__(self, input_size, hidden_size, num_layers):
+        self.layers = [LstmCell(input_size if not l else hidden_size, hidden_size)
+                       for l in range(num_layers)]
+        super(Lstm, self).__init__(**{'Layer_{}'.format(i): l for i, l in
+                                      enumerate(self.layers)})
+
+        self.input_size = input_size
+        self.hidden_size = hidden_size
+        self.num_layers = num_layers
+
+    def __call__(self, input, hiddens):
+        outputs = []
+        # Could also have used F.split_axis(input, input.shape[1], 1), but that
+        # creates input.shape[1] arrays / views
+        for i in range(input.shape[1]):
+            values = input[:, i, :]
+            for l in range(self.num_layers):
+                h_t, c_t = self.layers[l](values, hiddens[l])
+                values = h_t
+                hiddens[l] = h_t, c_t
+            outputs.append(values)
+        outputs = F.stack(outputs, 1)
+        return outputs, hiddens
+
+    def init_hidden(self, batch_size):
+        return [self.layers[l].init_hidden(batch_size)
+                for l in range(self.num_layers)]
+
+    def save_parameters(self, out_dict=None, prefix=''):
+        """
+        Saves the parameters into a dictionary that can later be e.g. savez'd.
+        If prefix is specified, it is prepended to the names of the parameters,
+        allowing for hierarchical saving / loading of parameters of a composite
+        model.
+        """
+        if out_dict is None:
+            out_dict = {}
+        for l, layer in enumerate(self.layers):
+            self.layers[l].save_parameters(
+                out_dict, prefix + 'Layer_' + str(l) + '/')
+        return out_dict
+
+    def load_parameters(self, data_dict, prefix=''):
+        """Loads the parameters saved by save_parameters()."""
+        for l, layer in enumerate(self.layers):
+            key = prefix + 'Layer_' + str(l) + '/'
+            part_dict = {k: v for k, v in data_dict.items() if k.startswith(key)}
+            layer.load_parameters(part_dict, key)
