@@ -7,7 +7,7 @@ reproduce the numbers exactly.
 """
 
 import argparse
-from functional import partial
+from functools import partial
 import math
 import os
 import sys
@@ -147,7 +147,7 @@ def get_batch(source, i, num_steps, evaluation=False):
     by the batchify function. The chunks are along dimension 0, corresponding
     to the seq_len dimension in the LSTM.
     """
-    seq_len = min(num_steps, source.size(1) - 1 - i)
+    seq_len = min(num_steps, source.shape[1] - 1 - i)
     # TODO can we no_grad target as well?
     data_chunk = source[:, i:i+seq_len]
     target_chunk = source[:, i+1:i+1+seq_len]
@@ -166,18 +166,18 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
     chainer.config.train = True
     total_loss = 0
     start_time = time.time()
-    data_len = train_data.size(1)
+    data_len = train_data.shape[1]
     hidden = model.init_hidden(batch_size)
     if trace:
-        print('HIDDEN', [[v.data.cpu().numpy() for v in t] for t in hidden])
+        print('HIDDEN', [[F.copy(v, -1).data for v in t] for t in hidden])
 
     for batch, i in enumerate(range(0, data_len - 1, num_steps)):
         # print('FOR', batch, i, (train_data.size(1) - 1) // num_steps)
         data, targets = get_batch(train_data, i, num_steps)
         if trace:
             print('BATCH', batch)
-            print('DATA', data.cpu().numpy())
-            print('TARGET', targets.cpu().numpy())
+            print('DATA', F.copy(data, -1).data)
+            print('TARGET', F.copy(targets, -1).data)
 
         def to_str(f):
             return corpus.dictionary.idx2word[f]
@@ -193,8 +193,8 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
         model.cleargrads()
         output, hidden = model(data, hidden, trace)
         if trace:
-            print('LOGITS', output.data.size(), output.data.cpu().numpy())
-            print('FINAL STATE', [[v.data.cpu().numpy() for v in t] for t in hidden])
+            print('LOGITS', output.data.shape, F.copy(output, -1).data)
+            print('FINAL STATE', [[F.copy(v, -1).data for v in t] for t in hidden])
         # print('TARGETS\n', np.vectorize(to_str)(targets.data.cpu().numpy()))
         # _, indices = output.max(2)
         # print('OUTPUT\n', np.vectorize(to_str)(indices.data.cpu().numpy()))
@@ -217,13 +217,13 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
             # all_size += reduce(lambda a, b: a * b, shape)
             # print(name, shape, data.min(), data.max(), data.mean(), data.std())
             if trace:
-                print('GRAD', name, p.grad.data.cpu().numpy())
+                print('GRAD', name, F.copy(p.grad, -1).data)
             p.grad.data.clamp_(-5.0, 5.0)
             if trace:
-                print('GRAD CLIP', name, p.grad.data.cpu().numpy())
+                print('GRAD CLIP', name, F.copy(p.grad, -1).data)
             p.data.add_(-1 * lr, p.grad.data)
             if trace:
-                print('NEW VALUE', name, p.data.cpu().numpy())
+                print('NEW VALUE', name, F.copy(p, -1).data)
         # print('Sum', all_min, all_max, all_sum / all_size)
         # print()
         # if batch % log_interval == 0 and batch > 0:
@@ -252,7 +252,7 @@ def evaluate(model, corpus, data_source, criterion, batch_size, num_steps):
     # Turn on evaluation mode which disables dropout.
     chainer.config.train = False
     total_loss = 0
-    data_len = data_source.size(1)
+    data_len = data_source.shape[1]
     hidden = model.init_hidden(batch_size)
     for i in range(0, data_len - 1, num_steps):
         data, targets = get_batch(data_source, i, num_steps, evaluation=True)
