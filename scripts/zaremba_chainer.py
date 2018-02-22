@@ -222,7 +222,7 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
             p.grad_var = F.clip(p.grad_var, -5.0, 5.0)
             if trace:
                 print('GRAD CLIP', name[1:], F.copy(p.grad, -1).data)
-            p.data.add_(-1 * lr, p.grad.data)
+            p.data -= lr * p.grad_val
             if trace:
                 print('NEW VALUE', name[1:], F.copy(p, -1).data)
         # print('Sum', all_min, all_max, all_sum / all_size)
