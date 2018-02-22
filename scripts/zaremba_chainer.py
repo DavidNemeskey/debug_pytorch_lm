@@ -27,14 +27,15 @@ from pytorch_lm.loss import chainer_sequence_loss
 class SmallZarembaModel(Chain):
     """"Implements the small model from Zaremba (2014)."""
     def __init__(self, vocab_size):
-        super(SmallZarembaModel, self).__init__()
         self.hidden_size = 200
         self.input_size = 200
         self.num_layers = 2
 
-        self.encoder = L.EmbedID(vocab_size, self.input_size)
-        self.rnn = Lstm(self.input_size, self.hidden_size, self.num_layers)
-        self.decoder = L.Linear(self.hidden_size, vocab_size)
+        encoder = L.EmbedID(vocab_size, self.input_size)
+        rnn = Lstm(self.input_size, self.hidden_size, self.num_layers)
+        decoder = L.Linear(self.hidden_size, vocab_size)
+        super(SmallZarembaModel, self).__init__(
+            encoder=encoder, rnn=rnn, decoder=decoder)
         self.init_weights()
 
     def init_weights(self):
@@ -207,7 +208,7 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
         # `clip_grad_norm` helps prevent the exploding gradient problem in RNNs / LSTMs.
         # torch.nn.utils.clip_grad_norm(model.parameters(), config.clip)
         # all_min, all_max, all_sum, all_size = 1000, -1000, 0, 0
-        for name, p in model.named_parameters():
+        for name, p in model.namedparams():
             # data = p.grad.data
             # shape = data.size()
             # all_min = all_min if data.min() >= all_min else data.min()
@@ -217,13 +218,13 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
             # all_size += reduce(lambda a, b: a * b, shape)
             # print(name, shape, data.min(), data.max(), data.mean(), data.std())
             if trace:
-                print('GRAD', name, F.copy(p.grad, -1).data)
-            p.grad.data.clamp_(-5.0, 5.0)
+                print('GRAD', name[1:], F.copy(p.grad, -1).data)
+            p.grad_var = F.clip(p.grad_var, -5.0, 5.0)
             if trace:
-                print('GRAD CLIP', name, F.copy(p.grad, -1).data)
+                print('GRAD CLIP', name[1:], F.copy(p.grad, -1).data)
             p.data.add_(-1 * lr, p.grad.data)
             if trace:
-                print('NEW VALUE', name, F.copy(p, -1).data)
+                print('NEW VALUE', name[1:], F.copy(p, -1).data)
         # print('Sum', all_min, all_max, all_sum / all_size)
         # print()
         # if batch % log_interval == 0 and batch > 0:
@@ -287,6 +288,11 @@ def main():
     model = SmallZarembaModel(vocab_size)
     if args.cuda:
         model.to_gpu()
+
+    print('MODEL', model.xp)
+    print('ENCODER', model.encoder.xp)
+    print('RNN', model.rnn.xp)
+    print('DECODER', model.decoder.xp)
 
     train_batch_size = 20
     eval_batch_size = 20

@@ -136,9 +136,9 @@ try:
             ignore_label=ignore_label, reduce='no')
         losses = CF.reshape(flat_losses, (target.shape[0], target.shape[1]))
         if reduce_across_timesteps:
-            losses = reduce_across_timesteps(losses, axis=1, keepdim=True)
+            losses = reduce_across_timesteps(losses, axis=1, keepdims=True)
         if reduce_across_batch:
-            losses = reduce_across_batch(losses, axis=0, keepdim=True)
+            losses = reduce_across_batch(losses, axis=0, keepdims=True)
         return CF.squeeze(losses)
 
 except ImportError:
