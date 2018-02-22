@@ -3,6 +3,8 @@
 
 """Implements loss functions not in torch.nn."""
 
+import importlib
+
 import torch
 import torch.nn.functional as F
 import torch.nn.modules.loss as L
@@ -76,3 +78,68 @@ class SequenceLoss(L._WeightedLoss):
         if self.reduce_across_batch:
             losses = self.reduce_across_batch(losses, dim=0, keepdim=True)
         return torch.squeeze(losses)
+
+
+try:
+    chainer = importlib.import_module('chainer')
+    import chainer.functions as CF
+
+    def chainer_sequence_loss(input, target, weight=None, ignore_label=-1,
+                              reduce_across_batch='mean',
+                              reduce_across_timesteps='mean'):
+        """
+        Implements TensorFlow's sequence_loss.
+
+        In a way, this version is a bit more advanced that TF's, because it allows
+        specifying different aggregation functions along the minebatch and time
+        dimensions.
+
+        If provided, the optional argument `weight` should be a 1D `Tensor`
+        assigning weight to each of the classes. This is particularly useful when
+        you have an unbalanced training set.
+
+        `input` has to be a 3D `Tensor` of size `(minibatch, time steps, C)`.
+
+        This criterion expects a class index (0 to C-1) as the
+        `target` for each value of a 2D tensor of size `minibatch x time steps`.
+
+        Args:
+            weight (Variable, optional): a manual rescaling weight given to each class.
+               If given, has to be a Tensor of size `C`
+            ignore_index (int, optional): Specifies a target value that is ignored
+                and does not contribute to the input gradient. When size_average is
+                ``True``, the loss is averaged over non-ignored targets.
+            reduce_across_batch (str, optional): Whether to average (``'mean'``) or
+                ``'sum'`` the losses over the batch dimension, or keep the dimension
+                (``None``). The default is ``'mean'``.
+            reduce_across_timesteps (str, optional): Whether to average (``'mean'``) or
+                ``'sum'`` the losses over the time dimension, or keep the dimension
+                (``None``). The default is ``'mean'``.
+        """
+        def __aggr_func(func_str):
+            if not func_str:
+                return None
+            if func_str == 'sum':
+                return CF.sum
+            if func_str == 'mean':
+                return CF.mean
+            else:
+                raise ValueError('Invalid aggregation "{}"'.format(func_str))
+
+        reduce_across_batch = __aggr_func(reduce_across_batch)
+        reduce_across_timesteps = __aggr_func(reduce_across_timesteps)
+
+        flat_input = CF.reshape(input, (-1, input.shape[2]))
+        flat_targets = CF.reshape(target, (-1,))
+        flat_losses = CF.softmax_cross_entropy(
+            flat_input, flat_targets, class_weight=weight,
+            ignore_label=ignore_label, reduce='no')
+        losses = CF.reshape(flat_losses, (target.shape[0], target.shape[1]))
+        if reduce_across_timesteps:
+            losses = reduce_across_timesteps(losses, axis=1, keepdim=True)
+        if reduce_across_batch:
+            losses = reduce_across_batch(losses, axis=0, keepdim=True)
+        return CF.squeeze(losses)
+
+except ImportError:
+    pass
