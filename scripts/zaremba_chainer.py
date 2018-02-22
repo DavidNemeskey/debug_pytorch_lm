@@ -219,10 +219,10 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
             # print(name, shape, data.min(), data.max(), data.mean(), data.std())
             if trace:
                 print('GRAD', name[1:], F.copy(p.grad, -1).data)
-            p.grad_var = F.clip(p.grad_var, -5.0, 5.0)
+            p.grad = p.grad.clip(-5.0, 5.0)
             if trace:
                 print('GRAD CLIP', name[1:], F.copy(p.grad, -1).data)
-            p.data -= lr * p.grad_val
+            p.data -= lr * p.grad
             if trace:
                 print('NEW VALUE', name[1:], F.copy(p, -1).data)
         # print('Sum', all_min, all_max, all_sum / all_size)
@@ -237,7 +237,7 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
         total_loss += loss.data / num_steps
 
         if batch % log_interval == 0 and batch > 0:
-            cur_loss = total_loss[0] / log_interval
+            cur_loss = np.asscalar(F.copy(total_loss, -1).data) / log_interval
             elapsed = time.time() - start_time
             print('| epoch {:3d} | {:5d}/{:5d} batches | lr {:02.2f} | '
                   'ms/batch {:5.2f} | loss {:5.2f} | ppl {:8.2f}'.format(
@@ -288,11 +288,6 @@ def main():
     model = SmallZarembaModel(vocab_size)
     if args.cuda:
         model.to_gpu()
-
-    print('MODEL', model.xp)
-    print('ENCODER', model.encoder.xp)
-    print('RNN', model.rnn.xp)
-    print('DECODER', model.decoder.xp)
 
     train_batch_size = 20
     eval_batch_size = 20
