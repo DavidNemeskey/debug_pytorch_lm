@@ -18,6 +18,12 @@ The (pytorch) code in this repository is basically the copy of the official exam
 1. LSTM has been implemented from scratch (note that its input is batch size x time steps as in TensorFlow);
 1. Only the small model is implemented.
 
+With this, the loss at `LR == 1.0` actually reproduces the numbers in the paper. Great!
+
+# !Deprecated!
+
+My original experience was that the loss at `LR == 1.0` blew up. I tried to find out why and even opened [issue #5306](https://github.com/pytorch/pytorch/issues/5306) in [pytorch](https://github.com/pytorch/pytorch). As pointed out by [ezyang](https://github.com/ezyang), this was caused by an error in how I clipped gradients. With the proper funtion (`torch.nn.utils.clip_grad_norm()`), the error disappeared. Yay! Still, I leave the original description here as a curiosity.
+
 With this, the loss at `LR == 1.0` actually **blows up**. Choosing the optimal learning rate (0.37) is only possible via a full parameter sweep (see below), but with it the model [_does_ arrive at the right numbers](logs/pytorch.log). However, any kind of optimization (that relies on local smoothness of the learning rate) is out of the question.
 
 ## Comparison with TensorFlow
