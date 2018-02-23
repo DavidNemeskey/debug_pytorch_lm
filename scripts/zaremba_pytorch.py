@@ -172,7 +172,6 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
     model.train()
     total_loss = 0
     start_time = time.time()
-    vocab_size = len(corpus.dictionary)
     data_len = train_data.size(1)
     hidden = model.init_hidden(batch_size)
     if trace:
@@ -225,7 +224,10 @@ def train(model, corpus, train_data, criterion, epoch, lr, batch_size,
             # print(name, shape, data.min(), data.max(), data.mean(), data.std())
             if trace:
                 print('GRAD', name, p.grad.data.cpu().numpy())
-            p.grad.data.clamp_(-5.0, 5.0)
+
+        torch.nn.utils.clip_grad_norm(model.parameters(), 5.0)
+
+        for name, p in model.named_parameters():
             if trace:
                 print('GRAD CLIP', name, p.grad.data.cpu().numpy())
             p.data.add_(-1 * lr, p.grad.data)
@@ -259,7 +261,6 @@ def evaluate(model, corpus, data_source, criterion, batch_size, num_steps):
     # Turn on evaluation mode which disables dropout.
     model.eval()
     total_loss = 0
-    vocab_size = len(corpus.dictionary)
     data_len = data_source.size(1)
     hidden = model.init_hidden(batch_size)
     for i in range(0, data_len - 1, num_steps):

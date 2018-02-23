@@ -18,6 +18,12 @@ The (pytorch) code in this repository is basically the copy of the official exam
 1. LSTM has been implemented from scratch (note that its input is batch size x time steps as in TensorFlow);
 1. Only the small model is implemented.
 
+With this, the loss at `LR == 1.0` actually reproduces the numbers in the paper. Great!
+
+# !Deprecated!
+
+My original experience was that the loss at `LR == 1.0` blew up. I tried to find out why and even opened [issue #5306](https://github.com/pytorch/pytorch/issues/5306) in [pytorch](https://github.com/pytorch/pytorch). As pointed out by [ezyang](https://github.com/ezyang), this was caused by an error in how I clipped gradients. With the proper funtion (`torch.nn.utils.clip_grad_norm()`), the error disappeared. Yay! Still, I leave the original description here as a curiosity.
+
 With this, the loss at `LR == 1.0` actually **blows up**. Choosing the optimal learning rate (0.37) is only possible via a full parameter sweep (see below), but with it the model [_does_ arrive at the right numbers](logs/pytorch.log). However, any kind of optimization (that relies on local smoothness of the learning rate) is out of the question.
 
 ## Comparison with TensorFlow
@@ -52,11 +58,12 @@ As the table shows, while the loss is the same for the first few iterations, alr
 ### Hyperparameter search
 Since the perplexity even after 1/10 of the data is a very strong indicator for the final score, I did a quick hyperparameter search to find the optimal LR. Who knows, maybe it is simply different for TF and PT? I ran the training up to 200 iterations, and tried values from 0.01 to 2.0 in 0.01 increments. The results are in the `log` directory:
 
-| File | Library | Float size |
-|------|---------|------------|
-| `tf_loss_at_lr.txt` | TensorFlow | 32 bit |
-| `pt_loss_at_lr.txt` | Pytorch    | 32 bit |
-| `pt_loss_at_lr_64.txt` | Pytorch    | 64 bit |
+| File | Library | Float size | Device |
+|------|---------|------------|--------|
+| `tf_loss_at_lr.txt` | TensorFlow | 32 bit | GPU |
+| `pt_loss_at_lr.txt` | Pytorch    | 32 bit | GPU |
+| `pt_loss_at_lr_64.txt` | Pytorch    | 64 bit | GPU |
+| `pt_loss_at_lr_cpu.txt` | Pytorch    | 32 bit | CPU |
 
 The following graphs show the perplexity against the LR.
 
@@ -72,7 +79,11 @@ The following graphs show the perplexity against the LR.
 |-----------------------|
 | <img src="logs/pt_loss_at_lr_64.png" alt="Pytorch PPL vs LR, 64 bit" width="640"> |
 
-As can be seen, while the TF graph is nice and smooth(ish), with no extreme values and only two spikes, both PT graphs are all over the place. (Perplexity is cut at 3000 -- the maximum value is in the order of `e+280`.) It seems as if PT is not just more sensitive to the learning rate, but its effect on the result is completely chaotic. It seems that the underlying implementation in Pytorch is **numerically unstable**.
+| Pytorch, PPL vs LR, 32 bit, CPU (cut at 3000) |
+|-----------------------|
+| <img src="logs/pt_loss_at_lr_cpu.png" alt="Pytorch PPL vs LR, 32 bit, CPU" width="640"> |
+
+As can be seen, while the TF graph is nice and smooth(ish), with no extreme values and only two spikes, the PT graphs (GPU / CPU, 32 / 64 bit) are all over the place. (Perplexity is cut at 3000 -- the maximum value is in the order of `e+280`.) It seems as if PT is not just more sensitive to the learning rate, but its effect on the result is completely chaotic. It seems that the underlying implementation in Pytorch is **numerically unstable**.
 
 (Note that this instability persists if I replace my `SequenceLoss` with the original loss function multiplied by `num_steps`, so the problem is not because of that.)
 
@@ -100,3 +111,5 @@ Versions of the libraries used:
 | Tensorflow | 1.4.1 | In a different environment, because in conda, it brings in a different CuDNN version |
 | CuDNN   | 6021 | According to `torch.backends.cudnn.version()` |
 | CUDA    | 8.0  | |
+| mkl     | 2018.0.1 | from `conda list` |
+| numpy   | 1.14.0 | from `conda list` |
